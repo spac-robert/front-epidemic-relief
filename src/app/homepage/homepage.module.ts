@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HomepageComponent} from "./component/homepage.component";
 import {BannerModule} from "../banner/banner.module";
+import {CarouselModule} from "../carousel/carousel.module";
 
 
 
@@ -13,6 +14,7 @@ import {BannerModule} from "../banner/banner.module";
   imports: [
     CommonModule,
     BannerModule,
+    CarouselModule,
   ]
 })
 export class HomepageModule { }

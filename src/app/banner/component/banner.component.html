@@ -1,4 +1,10 @@
-<p>banner works!</p>
-<div>
-  <img src="{{image}}" alt="">
-</div>
+<c-carousel [interval]="3000" transition="slide">
+  <c-carousel-inner>
+    <c-carousel-item *ngFor="let slide of images">
+      <img
+        [src]="slide"
+        loading="lazy"
+       alt=""/>
+    </c-carousel-item>
+  </c-carousel-inner>
+</c-carousel>
