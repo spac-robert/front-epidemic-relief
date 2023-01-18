@@ -1,1 +1,11 @@
-<p>products works!</p>
+<div class="container">
+  <div class="product">
+    <img [src]="product.media.url" alt="Product Image">
+    <div>
+      <h2>{{product.name}}</h2>
+      <p class="price">Price: {{product.price}} Ron</p>
+      <p class="description">Description: {{product.description}}</p>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+</div>

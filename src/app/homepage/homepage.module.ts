@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {HomepageComponent} from "./component/homepage.component";
 import {BannerModule} from "../banner/banner.module";
-import {CarouselModule} from "../carousel/carousel.module";
-
+import {ProductCarouselModule} from "../carousel/carousel.module";
 
 
 @NgModule({
@@ -14,7 +13,7 @@ import {CarouselModule} from "../carousel/carousel.module";
   imports: [
     CommonModule,
     BannerModule,
-    CarouselModule,
+    ProductCarouselModule,
   ]
 })
 export class HomepageModule { }

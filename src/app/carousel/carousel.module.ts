@@ -1,9 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ProductCarouselComponent} from "./product-carousel/product-carousel.component";
-import {NgbCarousel, NgbSlide} from "@ng-bootstrap/ng-bootstrap";
-import {IvyCarouselModule} from "angular-responsive-carousel";
-
 
 
 @NgModule({
@@ -13,9 +10,6 @@ import {IvyCarouselModule} from "angular-responsive-carousel";
   ],
   imports: [
     CommonModule,
-    NgbCarousel,
-    NgbSlide,
-    IvyCarouselModule
   ]
 })
-export class CarouselModule { }
+export class ProductCarouselModule { }
