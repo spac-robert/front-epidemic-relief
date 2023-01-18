@@ -10,41 +10,20 @@ import {ProductModel} from "../../../dto/product.model";
 })
 export class ProductsComponent implements OnInit {
 
-  product: ProductModel = {
-    name: '',
-    description: '',
-    expirationDate: '',
-    manufacturer: '',
-    price: 0,
-    media: {
-      uploadImageData: null,
-      mime: '',
-      url: '',
-    }
-  }
-  retrievedImage: any;
-  private retrieveResponse: any;
-  private base64Data: any;
+  product: ProductModel | undefined
 
-  constructor(private service: ProductService, private http: HttpClient) {
+  //TODO sa fac sa primesc o lista de produse
+  url: any
+
+  constructor(private service: ProductService) {
   }
 
   ngOnInit(): void {
+    this.product = this.service.getProductByCode("1")
+    console.log(this.product)
+    this.url = "/products/p/" + this.product?.id;
+    console.log(this.url)
 
-    this.http.get('http://localhost:8080/products/1')
-      .subscribe(
-        res => {
-          this.retrieveResponse = res;
-          console.log(res)
-          this.base64Data = this.retrieveResponse.mediaUrl.data;
-          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-          this.product.media.url = this.retrievedImage
-          this.product.name = this.retrieveResponse.name
-          this.product.price = this.retrieveResponse.price;
-          this.product.description = this.retrieveResponse.description
-          this.product.expirationDate = this.retrieveResponse.expirationDate;
-        }
-      );
   }
 
 }

@@ -7,10 +7,12 @@ import {HomepageModule} from "./homepage/homepage.module";
 import {HeaderModule} from "./header/header.module";
 import {ProductModule} from "./products/product.module";
 import {AddProductModule} from "./products/component/add-product/add-product.moddule";
+import { ProductDetailsComponent } from './products/component/product-details/product-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,
