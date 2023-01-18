@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductModel} from "../../../dto/product.model";
 import {ProductService} from "../../../service/product.service";
-import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -15,9 +14,9 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private service: ProductService, private route: ActivatedRoute) {
   }
 
+  //TODO de facut pagina de brand details
   ngOnInit(): void {
     let code = this.route.snapshot.paramMap.get('code');
-    console.log(code)
     if (code != null) {
       this.product = this.service.getProductByCode(code);
     }
