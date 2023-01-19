@@ -1,5 +1,5 @@
 <div class="container" *ngIf="product">
-  <div class="product">
+  <div class="product" *ngIf="product.id">
     <a [routerLink]="url">
       <img [src]="product.media.url" alt="Product Image">
       <div>

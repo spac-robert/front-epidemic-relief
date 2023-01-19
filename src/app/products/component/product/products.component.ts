@@ -17,11 +17,10 @@ export class ProductsComponent implements OnInit {
   constructor(private service: ProductService) {
   }
 
+  //TODO incerc sa imi returneze undefined ca in *ngIf sa nu imi mai faca display daca nu am produs
   ngOnInit(): void {
     this.product = this.service.getProductByCode("1")
-    console.log(this.product)
     this.url = "/products/p/" + this.product?.id;
-    console.log(this.url)
 
   }
 
