@@ -6,6 +6,7 @@ export interface ProductModel {
   description: string;
   manufacturer: string;
   media: Media;
+  mediaUrl:string;
 
 }
 

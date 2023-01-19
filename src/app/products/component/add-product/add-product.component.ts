@@ -21,7 +21,8 @@ export class AddProductComponent implements OnInit {
       uploadImageData: null,
       mime: '',
       url: '',
-    }
+    },
+    mediaUrl:""
   }
 
 

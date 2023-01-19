@@ -7,8 +7,7 @@ import {Observable} from "rxjs";
   {providedIn: 'root'}
 )
 export class ProductService {
-  products: ProductModel[] | undefined;
-  product: ProductModel = {
+  defaultProduct: ProductModel = {
     name: '',
     description: '',
     expirationDate: '',
@@ -18,8 +17,11 @@ export class ProductService {
       uploadImageData: null,
       mime: '',
       url: '',
-    }
+    },
+    mediaUrl: ""
   }
+  products: ProductModel[] = [];
+  product = this.defaultProduct
   product$: Observable<ProductModel> | undefined
   retrievedImage: any;
   private retrieveResponse: any;
@@ -35,19 +37,46 @@ export class ProductService {
       );
   }
 
-  // getProducts(pageSize: string, pageNumber: string, sortBy: string, sortDir: string): Observable<ProductModel[]> {
+  //TODO sa vad cum sa fac sa se salveze url image
+  // getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<ProductModel[]> {
   //   let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
-  //   // const imageUrl = URL.createObjectURL(response)
   //
-  //   let x = this.http.get<ProductModel[]>(url).subscribe((prod: ProductModel[]) => {
-  //     this.products = prod;
-  //     this.products.forEach((product: ProductModel) => {
-  //       product.mediaUrl = URL.createObjectURL(product.media)
+  //   this.http.get<ProductModel[]>(url).subscribe((prod: ProductModel[]) => {
+  //     prod.forEach((product: ProductModel) => {
+  //       console.log(product)
   //     })
+  //     // prod.forEach((product: ProductModel) => {
+  //     //   this.product = this.defaultProduct
+  //     //   this.retrieveResponse = product;
+  //     //   this.base64Data = this.retrieveResponse.mediaUrl.data;
+  //     //   this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+  //     //   this.product.media.url = this.retrievedImage
+  //     //   this.product.name = this.retrieveResponse.name
+  //     //   this.product.price = this.retrieveResponse.price;
+  //     //   this.product.description = this.retrieveResponse.description
+  //     //   this.product.expirationDate = this.retrieveResponse.expirationDate;
+  //     //   this.product.id = this.retrieveResponse.id;
+  //     //   this.products?.push(this.product);
+  //     //   // product.media.url = URL.createObjectURL(product.media.url)
+  //     // })
   //   })
-  //
-  //   return this.http.get<ProductModel[]>(url)
+  //   return this.http.get<ProductModel[]>(url);
   // }
+
+  getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): ProductModel[] {
+    let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
+
+    this.http.get<ProductModel[]>(url).subscribe(res => {
+      for (let i = 0; i < res.length; i++) {
+        this.retrieveResponse = res[i];
+        this.base64Data = this.retrieveResponse.mediaUrl.data;
+        this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        res[i].mediaUrl = this.retrievedImage
+      }
+      this.products = res
+    })
+    return this.products;
+  }
 
   getProductByCode(code: string): ProductModel | undefined {
 
@@ -68,4 +97,5 @@ export class ProductService {
     return this.product;
 
   }
+
 }
