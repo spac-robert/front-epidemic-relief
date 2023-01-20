@@ -1,6 +1,25 @@
-<div class="container mt-5 mb-5"  *ngIf="products$">
+<!--<div class="container mt-5 mb-5"  *ngIf="products$">-->
+<!--  <div class="row">-->
+<!--    <div *ngFor="let product of products$" class="col-lg">-->
+<!--      <div class="product">-->
+<!--        <a [routerLink]="url+product.id">-->
+<!--          <img [src]="product.mediaUrl" alt="Product Image">-->
+<!--          <div>-->
+<!--            <h2>{{product.name}}</h2>-->
+<!--            <p class="price">Price: {{product.price}} Ron</p>-->
+<!--            <p class="description">Description: {{product.description}}</p>-->
+<!--          </div>-->
+<!--        </a>-->
+<!--        <button>Add to Cart</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="container mt-5 mb-5" *ngIf="products$">
   <div class="row">
-    <div *ngFor="let product of products$" class="col-lg">
+    <div *ngFor="let product of products$ | paginate:{itemsPerPage:3,currentPage:page,totalItems:totalLength}"
+         class="col-lg">
       <div class="product">
         <a [routerLink]="url+product.id">
           <img [src]="product.mediaUrl" alt="Product Image">
@@ -15,21 +34,5 @@
     </div>
   </div>
 </div>
+<pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
 
-<!--<div *ngIf="products$ | async as products">-->
-<!--  {{products | json}}-->
-<!--  <div class="container" *ngFor="let product of products">-->
-<!--    {{product.name}}-->
-<!--    <div class="product" *ngIf="product.id">-->
-<!--      <a [routerLink]="url">-->
-<!--        <img [src]="product.media.url" alt="Product Image">-->
-<!--        <div>-->
-<!--          <h2>{{product.name}}</h2>-->
-<!--          <p class="price">Price: {{product.price}} Ron</p>-->
-<!--          <p class="description">Description: {{product.description}}</p>-->
-<!--        </div>-->
-<!--      </a>-->
-<!--      <button>Add to Cart</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
