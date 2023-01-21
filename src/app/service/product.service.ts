@@ -37,32 +37,6 @@ export class ProductService {
       );
   }
 
-  //TODO sa vad cum sa fac sa se salveze url image
-  // getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<ProductModel[]> {
-  //   let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
-  //
-  //   this.http.get<ProductModel[]>(url).subscribe((prod: ProductModel[]) => {
-  //     prod.forEach((product: ProductModel) => {
-  //       console.log(product)
-  //     })
-  //     // prod.forEach((product: ProductModel) => {
-  //     //   this.product = this.defaultProduct
-  //     //   this.retrieveResponse = product;
-  //     //   this.base64Data = this.retrieveResponse.mediaUrl.data;
-  //     //   this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-  //     //   this.product.media.url = this.retrievedImage
-  //     //   this.product.name = this.retrieveResponse.name
-  //     //   this.product.price = this.retrieveResponse.price;
-  //     //   this.product.description = this.retrieveResponse.description
-  //     //   this.product.expirationDate = this.retrieveResponse.expirationDate;
-  //     //   this.product.id = this.retrieveResponse.id;
-  //     //   this.products?.push(this.product);
-  //     //   // product.media.url = URL.createObjectURL(product.media.url)
-  //     // })
-  //   })
-  //   return this.http.get<ProductModel[]>(url);
-  // }
-
   getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): ProductModel[] {
     let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
 

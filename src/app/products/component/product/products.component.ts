@@ -22,28 +22,25 @@ export class ProductsComponent implements OnInit {
   }
 
   //TODO sa adaug stock la produse
-  //TODO sa setes sort-ul dupa anumite criterii si tipul de sortare asc sau desc si page number astea sa se ia
-  //din html. Exemplu e pe ChatGPT am si ss facut cu asta
+  //TODO sa vad de ce dispar cand dau refresh si dc nu apar cand dau din prima pe /products
 
   //TODO imi apar produsele, dar dupa ce dau refresh imi dispar
   //TODO sa fac un sort-control-group ca pe emag cu sort si filters
-  selectedSort: string = "name";
 
   ngOnInit(): void {
     this.products$ = this.service.getProducts(this.pageSize, this.page, this.sortBy, this.sortDir);
+    console.log(this.products$)
     this.totalLength = this.products$.length
 
   }
 
-  getProducts(sortBy: string, sortDir: string, $event: number, pageSize: number) {
+  getProducts(sortBy: string, sortDir: string, pageSize: number) {
+    console.log(this.products$)
+    console.log(sortBy)
+    console.log(sortDir)
     this.products$ = this.service.getProducts(pageSize, this.page, sortBy, sortDir);
+    console.log(this.products$)
+
   }
 
-  sortProducts() {
-    if (this.selectedSort === 'name') {
-      this.products$?.sort((a, b) => a.name.localeCompare(b.name));
-    } else {
-      this.products$?.sort((a, b) => a.manufacturer.localeCompare(b.manufacturer));
-    }
-  }
 }
