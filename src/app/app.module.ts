@@ -7,7 +7,8 @@ import {HomepageModule} from "./homepage/homepage.module";
 import {HeaderModule} from "./header/header.module";
 import {ProductModule} from "./products/product.module";
 import {AddProductModule} from "./products/component/add-product/add-product.moddule";
-import { ProductDetailsComponent } from './products/component/product-details/product-details.component';
+import {ProductDetailsComponent} from './products/component/product-details/product-details.component';
+import {StoreModule} from "@ngrx/store";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,10 @@ import { ProductDetailsComponent } from './products/component/product-details/pr
     HomepageModule,
     HeaderModule,
     ProductModule,
-    AddProductModule
+    AddProductModule,
+    //TODO aici nu stiu daca trebuie sa fac asa
+    //StoreModule.forRoot({products:productReducer})
+    StoreModule.forRoot({})
 
   ],
   providers: [],

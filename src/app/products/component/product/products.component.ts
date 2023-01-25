@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../../service/product.service";
 import {ProductModel} from "../../../dto/product.model";
+import {AppState} from "../../../app.state";
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+import {selectProductList} from "../../../store/selector/product.selector";
 
 @Component({
   selector: 'app-products',
@@ -18,7 +22,10 @@ export class ProductsComponent implements OnInit {
   products$: ProductModel[] | undefined
   url = "/products/p/"
 
-  constructor(private service: ProductService) {
+  products: Observable<ProductModel[]>;
+
+  constructor(private service: ProductService, private store: Store<AppState>) {
+    this.products = store.select(selectProductList);
   }
 
   //TODO sa adaug stock la produse

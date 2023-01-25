@@ -10,6 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProductDetailsComponent implements OnInit {
   product: ProductModel | undefined
+  stock: number = 0;
 
   constructor(private service: ProductService, private route: ActivatedRoute) {
   }
@@ -20,5 +21,20 @@ export class ProductDetailsComponent implements OnInit {
     if (code != null) {
       this.product = this.service.getProductByCode(code);
     }
+  }
+
+  incrementStock() {
+    //TODO validare sa nu depaseasca mai mult de stock-ul produsului
+    this.stock++;
+  }
+
+  decrementStock() {
+    if (this.stock > 0) {
+      this.stock--;
+    }
+  }
+
+  addToCart() {
+
   }
 }
