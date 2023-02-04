@@ -22,7 +22,12 @@ export class AddProductComponent implements OnInit {
       mime: '',
       url: '',
     },
-    mediaUrl:""
+    mediaUrl: {
+      name: '',
+      id: 0,
+      data: new Blob()
+    },
+    image: ""
   }
 
 

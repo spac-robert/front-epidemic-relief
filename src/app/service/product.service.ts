@@ -1,4 +1,4 @@
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {ProductModel} from "../dto/product.model";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
@@ -18,7 +18,12 @@ export class ProductService {
       mime: '',
       url: '',
     },
-    mediaUrl: ""
+    mediaUrl: {
+      name: '',
+      id: 0,
+      data: new Blob()
+    },
+    image: ""
   }
   products: ProductModel[] = [];
   product = this.defaultProduct
@@ -37,21 +42,26 @@ export class ProductService {
       );
   }
 
-  getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): ProductModel[] {
+  // getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): ProductModel[] {
+  //   let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
+  //
+  //   this.http.get<ProductModel[]>(url).subscribe(res => {
+  //     for (let i = 0; i < res.length; i++) {
+  //       this.retrieveResponse = res[i];
+  //       this.base64Data = this.retrieveResponse.mediaUrl.data;
+  //       this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+  //       res[i].mediaUrl = this.retrievedImage
+  //     }
+  //     this.products = res
+  //   })
+  //   return this.products;
+  // }
+  getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<ProductModel[]> {
     let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
-
-    this.http.get<ProductModel[]>(url).subscribe(res => {
-      for (let i = 0; i < res.length; i++) {
-        this.retrieveResponse = res[i];
-        this.base64Data = this.retrieveResponse.mediaUrl.data;
-        this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-        res[i].mediaUrl = this.retrievedImage
-      }
-      this.products = res
-    })
-    return this.products;
+    return this.http.get<ProductModel[]>(url);
   }
 
+  //todo refactor to move logic to component
   getProductByCode(code: string): ProductModel | undefined {
 
     this.http.get<ProductModel>('http://localhost:8080/products/' + code)
