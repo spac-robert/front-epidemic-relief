@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 export class ProductService {
   defaultProduct: ProductModel = {
     name: '',
+    stock: 0,
     description: '',
     expirationDate: '',
     manufacturer: '',
@@ -23,7 +24,7 @@ export class ProductService {
       id: 0,
       data: new Blob()
     },
-    image: ""
+    image: "",
   }
   products: ProductModel[] = [];
   product = this.defaultProduct

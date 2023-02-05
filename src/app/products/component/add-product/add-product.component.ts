@@ -13,6 +13,7 @@ export class AddProductComponent implements OnInit {
 
   product: ProductModel = {
     name: '',
+    stock: 0,
     description: '',
     expirationDate: '',
     manufacturer: '',
@@ -30,8 +31,6 @@ export class AddProductComponent implements OnInit {
     image: ""
   }
 
-
-  //products$: Observable<ProductModel[]> = this.service.getProducts("3", "0", "name", "asc");
   selectedFile!: File;
   retrievedImage: any;
   uploadImageData?: FormData;
@@ -56,6 +55,7 @@ export class AddProductComponent implements OnInit {
     this.uploadImageData?.append('description', this.product.description);
     this.uploadImageData?.append('name', this.product.name);
     this.uploadImageData?.append('price', this.product.price.toString());
+    this.uploadImageData?.append('stock', this.product.stock.toString());
     this.uploadImageData?.append('manufacturer', this.product.manufacturer);
     this.uploadImageData?.append('expirationDate', this.product.expirationDate);
 
