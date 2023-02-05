@@ -1,3 +1,25 @@
+export interface Page<T> {
+  content: T[];
+  totalElements: number;
+  pageNumber: number;
+  pageSize: number;
+
+  pageable: Pageable;
+
+}
+
+export interface Pageable {
+  pageNumber: number;
+  pageSize: number;
+  sort: Sort;
+}
+
+export interface Sort {
+  direction: string;
+  property: string;
+}
+
+
 export interface ProductModel {
   id?: string;
   name: string;

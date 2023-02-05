@@ -12,7 +12,7 @@ import {productReducer} from "../store/reducer/product.reducer";
 
 @NgModule({
   declarations: [
-    ProductsComponent
+    ProductsComponent,
   ],
   imports: [
     CommonModule,

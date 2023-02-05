@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import {ProductModel} from "../dto/product.model";
+import {Page, ProductModel} from "../dto/product.model";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 
@@ -42,23 +42,13 @@ export class ProductService {
       );
   }
 
-  // getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): ProductModel[] {
+  // getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<ProductModel[]> {
   //   let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
-  //
-  //   this.http.get<ProductModel[]>(url).subscribe(res => {
-  //     for (let i = 0; i < res.length; i++) {
-  //       this.retrieveResponse = res[i];
-  //       this.base64Data = this.retrieveResponse.mediaUrl.data;
-  //       this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-  //       res[i].mediaUrl = this.retrievedImage
-  //     }
-  //     this.products = res
-  //   })
-  //   return this.products;
+  //   return this.http.get<ProductModel[]>(url);
   // }
-  getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<ProductModel[]> {
+  getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<Page<ProductModel>> {
     let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
-    return this.http.get<ProductModel[]>(url);
+    return this.http.get<Page<ProductModel>>(url);
   }
 
   //todo refactor to move logic to component

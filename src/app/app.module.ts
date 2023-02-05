@@ -9,6 +9,7 @@ import {ProductModule} from "./products/product.module";
 import {AddProductModule} from "./products/component/add-product/add-product.moddule";
 import {ProductDetailsComponent} from './products/component/product-details/product-details.component';
 import {StoreModule} from "@ngrx/store";
+import {ProductsComponent} from "./products/component/product/products.component";
 
 @NgModule({
   declarations: [

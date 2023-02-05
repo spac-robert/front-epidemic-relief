@@ -3,7 +3,7 @@ import {ProductService} from "../../../service/product.service";
 import {ProductModel} from "../../../dto/product.model";
 import {AppState} from "../../../app.state";
 import {Store} from "@ngrx/store";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-products',
@@ -15,8 +15,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getAllProductSubscription: Subscription | undefined
   getSortedProductSubscription: Subscription | undefined
   totalLength: any;
-  page: number = 0
-  pageSize: number = 100
+  page: number = 1
+  pageSize: number = 12
   sortBy: string = "name"
   sortDir: string = "asc"
   url = "/products/p/"
@@ -35,16 +35,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   //TODO imi apar produsele, dar dupa ce dau refresh imi dispar
   //TODO sa fac un sort-control-group ca pe emag cu sort si filters
 
-  // ngOnInit(): void {
-  //   this.getAllProductSubscription = this.service.getProducts(this.pageSize, this.page, this.sortBy, this.sortDir).subscribe(
-  //     (products) => {
-  //       products.forEach(product => {
-  //         product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
-  //       })
-  //       this.products = products
-  //     }
-  //   );
-  // }
   ngOnInit(): void {
     this.getProducts(this.sortBy, this.sortDir, this.pageSize)
   }
@@ -55,14 +45,25 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   getProducts(sortBy: string, sortDir: string, pageSize: number) {
-    this.getSortedProductSubscription = this.service.getProducts(pageSize, this.page, sortBy, sortDir).subscribe(
+    this.getSortedProductSubscription = this.service.getProducts(pageSize, this.page - 1, sortBy, sortDir).subscribe(
       (products) => {
-        products.forEach(product => {
+        products.content.forEach(product => {
           product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
         })
-        this.products = products
+        this.products = products.content;
+        this.totalLength = products.totalElements;
+        console.log(this.totalLength)
+        this.pageSize = products.pageable.pageSize;
+        console.log(this.pageSize)
+        this.page = products.pageable.pageNumber + 1;
+        console.log(this.page)
+
       }
     );
   }
 
+  onPageChange($event: number) {
+    this.page = $event
+    this.getProducts(this.sortBy, this.sortDir, this.pageSize)
+  }
 }
