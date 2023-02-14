@@ -8,11 +8,13 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {ProductEffects} from "../store/effects/product.effects";
 import {productReducer} from "../store/reducer/product.reducer";
+import { AddLotComponent } from './component/add-lot/add-lot.component';
 
 
 @NgModule({
   declarations: [
     ProductsComponent,
+    AddLotComponent,
   ],
   imports: [
     CommonModule,

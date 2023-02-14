@@ -1,40 +1,46 @@
-<div class="center-div">
-  <div class="sort-control-group ">
-    <label>Sort by:</label>
-    <select [(ngModel)]="sortBy" (change)="getProducts(sortBy,sortDir,pageSize)">
-      <option value="name">Name</option>
-      <option value="manufacturer">Manufacturer</option>
-    </select>
+<div>
+  <div class="center-div">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="search products">
+    </div>
+  </div>
+  <div class="center-div">
+    <div class="sort-control-group ">
+      <label>Sort by:</label>
+      <select [(ngModel)]="sortBy" (change)="getProducts(sortBy,sortDir,pageSize)">
+        <option value="name">Name</option>
+        <option value="manufacturer">Manufacturer</option>
+      </select>
+    </div>
+
+    <div class="sort-control-group ">
+      <label>Sort direction:</label>
+      <select [(ngModel)]="sortDir" (change)="getProducts(sortBy,sortDir,pageSize)">
+        <option value="asc">Asc</option>
+        <option value="desc">Desc</option>
+      </select>
+    </div>
   </div>
 
-  <div class="sort-control-group ">
-    <label>Sort direction:</label>
-    <select [(ngModel)]="sortDir" (change)="getProducts(sortBy,sortDir,pageSize)">
-      <option value="asc">Asc</option>
-      <option value="desc">Desc</option>
-    </select>
-  </div>
-</div>
-
-<div class="container mt-5 mb-5" *ngIf="products">
-  <div class="row">
-    <div *ngFor="let product of products | paginate:{itemsPerPage:pageSize,currentPage:page,totalItems:totalLength}"
-         class="col-lg">
-      <div class="product">
-        <a [routerLink]="url+product.id">
-          <div>
-            <img [src]="product.image" alt="Product Image">
-          </div>
-          <div>
-            <h2>{{product.name}}</h2>
-            <p class="price">Price: {{product.price}} Ron</p>
-            <p class="description">Description: {{product.description}}</p>
-          </div>
-        </a>
-        <button class="center-btn">Add to Cart</button>
+  <div class="container mt-5 mb-5" *ngIf="products">
+    <div class="row">
+      <div *ngFor="let product of products | paginate:{itemsPerPage:pageSize,currentPage:page,totalItems:totalLength}"
+           class="col-lg">
+        <div class="product">
+          <a [routerLink]="url+product.id">
+            <div>
+              <img [src]="product.image" alt="Product Image">
+            </div>
+            <div>
+              <h2>{{product.name}}</h2>
+              <p class="price">Price: {{product.price}} Ron</p>
+              <p class="description">Description: {{product.description}}</p>
+            </div>
+          </a>
+          <button class="center-btn">Add to Cart</button>
+        </div>
       </div>
     </div>
   </div>
+  <pagination-controls class="text-center" (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
-<pagination-controls class="text-center" (pageChange)="onPageChange($event)"></pagination-controls>
-

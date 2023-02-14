@@ -1,60 +1,104 @@
-<!--<div *ngIf="product" class="container">-->
-<!--  <div class="center-image">-->
-<!--    <img [src]="product.media.url" alt="">-->
-<!--  </div>-->
+<!--&lt;!&ndash;<div *ngIf="product" class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="center-image">&ndash;&gt;-->
+<!--&lt;!&ndash;    <img [src]="product.media.url" alt="">&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
 
-<!--  <div class="chart">-->
-<!--    <div class="quantity">-->
-<!--      <label style="margin-top: 6px">Quantity</label>-->
-<!--      <button class="quantity__minus" (click)="incrementStock()">+</button>-->
-<!--      <span class="quantity__input">{{stock}}</span>-->
-<!--      <button class="quantity__plus" (click)="decrementStock()">-</button>-->
+<!--&lt;!&ndash;  <div class="chart">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="quantity">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label style="margin-top: 6px">Quantity</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <button class="quantity__minus" (click)="incrementStock()">+</button>&ndash;&gt;-->
+<!--&lt;!&ndash;      <span class="quantity__input">{{stock}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;      <button class="quantity__plus" (click)="decrementStock()">-</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;  Sa fur o descriere, un border ceva pt descriere&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--<div class="container">-->
+<!--  <section class="bg-light">-->
+<!--    <div class="row" *ngIf="product">-->
+<!--      <div class="col-lg-5 mt-5">-->
+<!--        <div class="center-image">-->
+<!--          <img [src]="product.media.url" alt="">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-7 mt-5">-->
+<!--        <div class="card">-->
+<!--          <div class="card-body">-->
+<!--            <h1 class="h2">{{product.name}}</h1>-->
+<!--            <p class="h3 py-2">{{product.price}}$</p>-->
+<!--            <ul class="list-inline">-->
+<!--              <li class="list-inline-item">Brand:</li>-->
+<!--              <li class="list-inline-item">{{product.manufacturer}}</li>-->
+<!--              <li class="list-inline-item">Stock:</li>-->
+<!--              <li class="list-inline-item">{{product.stock}}</li>-->
+<!--            </ul>-->
+<!--            <h6>Description:</h6>-->
+<!--            <p>{{product.description}}</p>-->
+<!--            <div class="chart">-->
+<!--              <div class="quantity">-->
+<!--                <label style="margin-top: 6px">Quantity</label>-->
+<!--                <button class="quantity__plus" (click)="decrementStock()">-</button>-->
+<!--                <span class="quantity__input">{{stock}}</span>-->
+<!--                <button class="quantity__minus" (click)="incrementStock()">+</button>-->
+<!--                <button (click)="addToCart()">Add to cart</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 <!--    </div>-->
+<!--  </section>-->
+<!--</div>-->
+<!--<section class="py-5">-->
+<!--  <div>-->
+<!--    Aici sa fac ceva o descriere plm-->
 <!--  </div>-->
-<!--</div>-->
+<!--</section>-->
 
-
-<!--<div>-->
-<!--  Sa fur o descriere, un border ceva pt descriere-->
-<!--</div>-->
-<div class="container">
-  <section class="bg-light">
-    <div class="row" *ngIf="product">
-      <div class="col-lg-5 mt-5">
-        <div class="center-image">
+<div class="container align" *ngIf="product">
+  <table>
+    <tr>
+      <th>
+        <div class="col-xs-4 item-photo">
           <img [src]="product.media.url" alt="">
         </div>
-      </div>
-      <div class="col-lg-7 mt-5">
-        <div class="card">
-          <div class="card-body">
-            <h1 class="h2">{{product.name}}</h1>
-            <p class="h3 py-2">{{product.price}}$</p>
-            <ul class="list-inline">
-              <li class="list-inline-item">Brand:</li>
-              <li class="list-inline-item">{{product.manufacturer}}</li>
-              <li class="list-inline-item">Stock:</li>
-              <li class="list-inline-item">{{product.stock}}</li>
-            </ul>
-            <h6>Description:</h6>
-            <p>{{product.description}}</p>
-            <div class="chart">
-              <div class="quantity">
-                <label style="margin-top: 6px">Quantity</label>
-                <button class="quantity__minus" (click)="incrementStock()">+</button>
-                <span class="quantity__input">{{stock}}</span>
-                <button class="quantity__plus" (click)="decrementStock()">-</button>
-                <button (click)="addToCart()">Add to cart</button>
-              </div>
-            </div>
+      </th>
+      <th>
+        <div class="col-xs-5 with-chart" style="border:0px solid gray">
+          <h3>{{product.name}}</h3>
+
+          <h6 class="title-price"><small>Price</small></h6>
+          <h3 style="margin-top:0;">{{product.price}} RON</h3>
+
+          <div class="quantity">
+            <label style="margin-top: 6px">Quantity</label>
+            <button class="quantity__plus" (click)="decrementStock()">-</button>
+            <span class="quantity__input">{{stock}}</span>
+            <button class="quantity__minus" (click)="incrementStock()">+</button>
+          </div>
+
+          <div class="section" style="padding-bottom:20px;">
+            <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart"
+                                                  aria-hidden="true" (click)="addToCart()"></span> Add to cart
+            </button>
           </div>
         </div>
-      </div>
+      </th>
+    </tr>
+  </table>
+  <div class="col-xs-9">
+    <ul class="menu-items">
+      <li class="active">Product details</li>
+    </ul>
+    <div style="width:100%;border-top:1px solid silver">
+      <p style="padding:15px;">
+        {{product.description}}
+      </p>
     </div>
-  </section>
-</div>
-<section class="py-5">
-  <div>
-    Aici sa fac ceva o descriere plm
   </div>
-</section>
+</div>
+

@@ -10,11 +10,15 @@ import {AddProductModule} from "./products/component/add-product/add-product.mod
 import {ProductDetailsComponent} from './products/component/product-details/product-details.component';
 import {StoreModule} from "@ngrx/store";
 import {ProductsComponent} from "./products/component/product/products.component";
+import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductDetailsComponent,
+    CartComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

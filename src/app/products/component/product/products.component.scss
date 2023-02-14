@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
 }
 
 img {
@@ -59,7 +58,9 @@ img {
     max-width: 25%;
     display: contents;
     grid-template-columns: 1fr;
-
+  }
+  .container {
+    max-width: 960px;
   }
 }
 
@@ -70,20 +71,16 @@ img {
   transform: translate(-50%, -10%);
 }
 
-.row {
-  margin-top: 25%;
-}
-
 .sort-control-group select {
   padding: 10px;
   border-radius: 5px;
   border: none;
   font-size: 16px;
   font-weight: bold;
+  margin: 0 30px;
 }
 
 .sort-control-group label {
-  margin-right: 10px;
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
@@ -94,3 +91,10 @@ img {
   align-items: center;
   justify-content: center;
 }
+
+.form-control {
+  margin-top: 2%;
+  border-radius: 3px;
+  width: 600px;
+}
+

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   homeUrl = '';
   productsUrl = '/products';
+  //TODO aici sa imi afiseze cartul persoanei conectate (ca si quest sau cu contul lui)
+  cartUrl = '/cart';
 }
