@@ -5,13 +5,15 @@ import {ProductsComponent} from "./products/component/product/products.component
 import {AddProductComponent} from "./products/component/add-product/add-product.component";
 import {ProductDetailsComponent} from "./products/component/product-details/product-details.component";
 import {CartComponent} from "./cart/cart.component";
+import {AddLotComponent} from "./products/component/add-lot/add-lot.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'product/add', component: AddProductComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'products/p/:code', component: ProductDetailsComponent},
-  {path: 'cart', component: CartComponent}
+  {path: 'cart', component: CartComponent},
+  {path: 'product/add/lot', component: AddLotComponent},
 ];
 
 @NgModule({

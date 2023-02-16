@@ -13,9 +13,9 @@ export class AddProductComponent implements OnInit {
 
   product: ProductModel = {
     name: '',
-    stock: 0,
+    // stock: 0,
     description: '',
-    expirationDate: '',
+    // expirationDate: '',
     manufacturer: '',
     price: 0,
     media: {
@@ -55,9 +55,9 @@ export class AddProductComponent implements OnInit {
     this.uploadImageData?.append('description', this.product.description);
     this.uploadImageData?.append('name', this.product.name);
     this.uploadImageData?.append('price', this.product.price.toString());
-    this.uploadImageData?.append('stock', this.product.stock.toString());
+    //this.uploadImageData?.append('stock', this.product.stock.toString());
     this.uploadImageData?.append('manufacturer', this.product.manufacturer);
-    this.uploadImageData?.append('expirationDate', this.product.expirationDate);
+   // this.uploadImageData?.append('expirationDate', this.product.expirationDate);
 
     this.service.addProduct(this.uploadImageData)
   }

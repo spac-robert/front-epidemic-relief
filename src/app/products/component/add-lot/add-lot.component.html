@@ -1,1 +1,17 @@
-<p>add-lot works!</p>
+<div class="container">
+  <div class="container">
+    <form>
+      <label for="idProduct">Id Product:</label><br>
+      <input type="number" id="idProduct" [(ngModel)]="lot.productId" name="idProduct"><br>
+      <br>
+      <label for="expiration-date">Expiration Date:</label><br>
+      <input type="date" id="expiration-date" [(ngModel)]="lot.expirationDate" name="expiration-date">
+      <br>
+      <br>
+      <label for="quantity">Quantity:</label><br>
+      <input type="number" id="quantity" [(ngModel)]="lot.quantity" name="quantity"><br>
+      <br>
+      <button (click)="submitForm()">Submit</button>
+    </form>
+  </div>
+</div>

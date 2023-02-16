@@ -24,8 +24,8 @@ export interface ProductModel {
   id?: string;
   name: string;
   price: number;
-  stock: number;
-  expirationDate: string;
+  // stock: number;
+  // expirationDate: string;
   description: string;
   manufacturer: string;
   media: Media;
@@ -46,4 +46,11 @@ export interface DisplayMedia {
   name: string;
   data: Blob;
 
+}
+
+export interface Lot {
+  id: string;
+  productId: number;
+  quantity: number;
+  expirationDate: string;
 }
