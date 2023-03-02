@@ -25,15 +25,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
   constructor(private service: ProductService, private store: Store<AppState>) {
-    // this.products = store.select(selectProductList);
   }
-
-
-  //TODO sa adaug stock la produse
-  //TODO sa vad de ce dispar cand dau refresh si dc nu apar cand dau din prima pe /products
-
-  //TODO imi apar produsele, dar dupa ce dau refresh imi dispar
-  //TODO sa fac un sort-control-group ca pe emag cu sort si filters
 
   ngOnInit(): void {
     this.getProducts(this.sortBy, this.sortDir, this.pageSize)

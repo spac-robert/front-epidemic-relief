@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import {Lot, Page, ProductModel} from "../dto/product.model";
+import {Page, ProductModel} from "../dto/product.model";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 
@@ -11,7 +11,7 @@ export class ProductService {
     name: '',
     //stock: 0,
     description: '',
-   // expirationDate: '',
+    // expirationDate: '',
     manufacturer: '',
     price: 0,
     media: {
@@ -65,7 +65,7 @@ export class ProductService {
           this.product.name = this.retrieveResponse.name
           this.product.price = this.retrieveResponse.price;
           this.product.description = this.retrieveResponse.description
-         // this.product.expirationDate = this.retrieveResponse.expirationDate;
+          // this.product.expirationDate = this.retrieveResponse.expirationDate;
           this.product.id = this.retrieveResponse.id;
         }
       );
