@@ -12,6 +12,7 @@ import {StoreModule} from "@ngrx/store";
 import {ProductsComponent} from "./products/component/product/products.component";
 import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { OrderComponent } from './order/order.component';
     ProductDetailsComponent,
     CartComponent,
     OrderComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

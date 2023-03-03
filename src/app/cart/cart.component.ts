@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
   }
 
   removeItem(cartProduct: CartModel) {
-    const index = this.cartItems.findIndex(item => item.product.id === cartProduct.product.id);
+    const index = this.cartItems.findIndex(item => item.product.id === cartProduct.product.id && item.quantity === cartProduct.quantity);
     if (index !== -1) {
       this.cartItems.splice(index,1);
       localStorage.setItem('cart_items', JSON.stringify(this.cartItems));
