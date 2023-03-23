@@ -54,3 +54,24 @@ export interface Lot {
   quantity: number;
   expirationDate: string;
 }
+
+export interface OrderDetails {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  card: Card
+}
+
+export interface Card {
+  cardName: string;
+  cardNumber: string;
+  expMonth: string;
+  expYear: string;
+  ccv: string;
+}

@@ -36,7 +36,7 @@ export class AddProductComponent implements OnInit {
   uploadImageData?: FormData;
 
 
-  constructor(private service: ProductService, private http: HttpClient) {
+  constructor(private service: ProductService) {
   }
 
   ngOnInit(): void {

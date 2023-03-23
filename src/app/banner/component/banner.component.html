@@ -1,9 +1,11 @@
-<c-carousel [interval]="3000" transition="slide">
-  <c-carousel-inner>
-    <c-carousel-item *ngFor="let slide of images">
-      <img
-        [src]="slide"
-       alt=""/>
-    </c-carousel-item>
-  </c-carousel-inner>
-</c-carousel>
+<div class="distance">
+  <c-carousel [interval]="3000" transition="slide">
+    <c-carousel-inner>
+      <c-carousel-item *ngFor="let slide of images">
+        <img
+          [src]="slide"
+          alt=""/>
+      </c-carousel-item>
+    </c-carousel-inner>
+  </c-carousel>
+</div>

@@ -18,42 +18,42 @@
 
     <div class='form-group mb-1'>
       <label class='mb-1' for='firstName'>First Name</label>
-      <input class='form-control mb-1' id='firstName' type='text'>
+      <input class='form-control mb-1' id='firstName' type='text' [(ngModel)]="order.firstName">
     </div>
 
     <div class='form-group mb-1'>
       <label class='mb-1' for='lastName'>Last Name</label>
-      <input id='lastName' type='text' class='form-control'>
+      <input id='lastName' type='text' class='form-control' [(ngModel)]="order.lastName">
     </div>
     <div class='form-group mb-1'>
       <label class='mb-1' for='email'>Email</label>
-      <input id='email' type='text' class='form-control'>
+      <input id='email' type='text' class='form-control' [(ngModel)]="order.email">
     </div>
 
     <div class='form-group mb-1'>
       <label class='mb-1' for='phone'>Phone Number</label>
-      <input id='phone' type='text' class='form-control'>
+      <input id='phone' type='text' class='form-control' [(ngModel)]="order.phoneNumber">
     </div>
 
     <div class='form-group mb-1'>
       <label class='mb-1'>Street</label>
-      <input class='form-control' type='text' id='street1'>
+      <input class='form-control' type='text' id='street1' [(ngModel)]="order.street">
     </div>
 
     <div class='form-group mb-1'>
       <label class='mb-1' for='city'>City</label>
-      <input type='text' id='city' class='form-control'>
+      <input type='text' id='city' class='form-control' [(ngModel)]="order.city">
     </div>
 
     <div class='form-row mb-2'>
       <div class='col-md-8'>
         <label class='mb-1' for='state'>State</label>
-        <input id='state' class='form-control'>
+        <input id='state' class='form-control' [(ngModel)]="order.state">
       </div>
       <div class='col-md-4'>
 
         <label class='mb-1' for='zip'>Zip</label>
-        <input type='text' id='zip' class='form-control'>
+        <input type='text' id='zip' class='form-control' [(ngModel)]="order.zip">
       </div>
     </div>
 
@@ -63,18 +63,18 @@
 
     <div class='form-group mb-1'>
       <label class='mb-1' for='nameOnCard'>Name on card</label>
-      <input class='form-control' id='nameOnCard'>
+      <input class='form-control' id='nameOnCard' [(ngModel)]="order.card.cardName">
     </div>
 
     <div class='form-group mb-1'>
       <label class='mb-1' for='cardNum'>Card number</label>
-      <input class='form-control' id='cardNum' placeholder="1111 2222 3333 4444">
+      <input class='form-control' id='cardNum' placeholder="1111 2222 3333 4444" [(ngModel)]="order.card.cardNumber">
     </div>
 
     <div class='form-row mb-1'>
       <div class='col'>
         <label class='mb-0' for='expMonth'>Expiration Month</label>
-        <select class='form-control' id='expMonth'>
+        <select class='form-control' id='expMonth' [(ngModel)]="order.card.expMonth">
           <option value='01'>Jan</option>
           <option value='02'>Feb</option>
           <option value='03'>March</option>
@@ -91,7 +91,7 @@
       </div>
       <div class='col'>
         <label class='mb-0' for='expYear'>Exp Year</label>
-        <select class='form-control' id='expYear'>
+        <select class='form-control' id='expYear' [(ngModel)]="order.card.expYear">
           <option value='2023'>2030</option>
           <option value='2023'>2029</option>
           <option value='2023'>2028</option>
@@ -104,9 +104,9 @@
       </div>
       <div class='col'>
         <label class='mb-0' for='ccv'>CCV</label>
-        <input placeholder='* * * *' class='form-control' id='ccv'>
+        <input placeholder='* * * *' class='form-control' id='ccv' [(ngModel)]="order.card.ccv">
       </div>
-      <button class='btn btn-primary mt-4' type='submit'><i class="fas fa-lock mr-2"></i>Submit Payment</button>
+      <button class='btn btn-primary mt-4' type='submit' (click)="submitForm()"><i class="fas fa-lock mr-2"></i>Submit Payment</button>
     </div>
   </form>
 </div>
