@@ -65,13 +65,13 @@ export interface OrderDetails {
   city: string;
   state: string;
   zip: string;
-  card: Card
+ // card: Card
 }
 
-export interface Card {
-  cardName: string;
-  cardNumber: string;
-  expMonth: string;
-  expYear: string;
-  ccv: string;
-}
+// export interface Card {
+//   cardName: string;
+//   cardNumber: string;
+//   expMonth: string;
+//   expYear: string;
+//   ccv: string;
+// }
