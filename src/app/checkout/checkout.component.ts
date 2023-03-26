@@ -21,13 +21,13 @@ export class CheckoutComponent implements OnInit  {
     city: "",
     state: "",
     zip: "",
-    card: {
-      cardName: "",
-      cardNumber: "",
-      expMonth: "",
-      expYear: "",
-      ccv: "",
-    }
+    // card: {
+    //   cardName: "",
+    //   cardNumber: "",
+    //   expMonth: "",
+    //   expYear: "",
+    //   ccv: "",
+    // }
   }
 
   //TODO sa vad dc nu am nimic pe this.order de ce nu mi le ia din acel form
@@ -71,7 +71,6 @@ export class CheckoutComponent implements OnInit  {
 
   watchPosition() {
     let desLat = 0;
-    let desLon = 0;
     let id = navigator.geolocation.watchPosition(
       (position) => {
         console.log(
