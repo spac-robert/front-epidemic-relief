@@ -2,32 +2,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
 }
+
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+
 .product {
-  display: flex;
+  display: inline-grid;
   flex-wrap: wrap;
   align-items: center;
   width: 215px;
   margin: 10px;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 35px;
 }
 
 .product img {
-  width: 150px;
+  width: 175px;
   margin-right: 20px;
 }
 
 .product h2 {
   font-size: 18px;
   margin-bottom: 10px;
+  margin-top: 20px;
+  margin-right: 5px;
 }
 
 .product .price {
@@ -41,7 +44,57 @@ img {
   color: white;
   padding: 12px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 35px;
   cursor: pointer;
   margin-top: 10px;
 }
+
+@media (min-width: 992px) {
+  .col-lg {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 25%;
+    display: contents;
+    grid-template-columns: 1fr;
+  }
+  .container {
+    max-width: 960px;
+  }
+}
+
+.center-btn {
+  position: relative;
+  top: 26%;
+  left: 45%;
+  transform: translate(-50%, -10%);
+}
+
+.sort-control-group select {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 30px;
+}
+
+.sort-control-group label {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.center-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-control {
+  margin-top: 2%;
+  border-radius: 3px;
+  width: 600px;
+}
+

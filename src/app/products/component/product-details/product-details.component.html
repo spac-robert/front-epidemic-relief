@@ -1,2 +1,44 @@
-<p>product-details works!</p>
-{{product | json}}
+<div class="container align" *ngIf="product">
+  <table>
+    <tr>
+      <th>
+        <div class="col-xs-4 item-photo">
+          <img [src]="product.media.url" alt="">
+        </div>
+      </th>
+      <th>
+        <div class="col-xs-5 with-chart" style="border:0px solid gray">
+          <h3>{{product.name}}</h3>
+
+          <h6 class="title-price"><small>Price</small></h6>
+          <h3 style="margin-top:0;">{{product.price}} RON</h3>
+
+          <div class="quantity">
+            <label style="margin-top: 6px">Quantity</label>
+            <button class="quantity__plus" (click)="decrementStock()">-</button>
+            <span class="quantity__input">{{stock}}</span>
+            <button class="quantity__minus" (click)="incrementStock()">+</button>
+          </div>
+
+          <div class="section" style="padding-bottom:20px;">
+            <button class="btn btn-success" [disabled]="stock === 0" (click)="addToCart(product,stock)">
+              <span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart"
+                    aria-hidden="true"></span> Add to cart
+            </button>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </table>
+  <div class="col-xs-9">
+    <ul class="menu-items">
+      <li class="active">Product details</li>
+    </ul>
+    <div style="width:100%;border-top:1px solid silver">
+      <p style="padding:15px;">
+        {{product.description}}
+      </p>
+    </div>
+  </div>
+</div>
+

@@ -1,40 +1,61 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from "../../../service/product.service";
 import {ProductModel} from "../../../dto/product.model";
-import {Observable} from "rxjs";
+import {AppState} from "../../../app.state";
+import {Store} from "@ngrx/store";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
-  product: ProductModel | undefined
+  getAllProductSubscription: Subscription | undefined
+  getSortedProductSubscription: Subscription | undefined
   totalLength: any;
-  page: number = 0
-  pageSize: number = 7
+  page: number = 1
+  pageSize: number = 12
   sortBy: string = "name"
   sortDir: string = "asc"
-  products$: ProductModel[] | undefined
   url = "/products/p/"
 
-  constructor(private service: ProductService) {
-  }
-  //TODO de facut paginarea
+  products: ProductModel[] | undefined;
 
-  //TODO imi apar produsele, dar dupa ce dau refresh imi dispar
+
+  constructor(private service: ProductService, private store: Store<AppState>) {
+  }
+
   ngOnInit(): void {
-    this.products$ = this.service.getProducts(this.pageSize, this.page, this.sortBy, this.sortDir);
-    // //sa iau toate produsele in products
-    // this.service.getProducts().subscribe((result) => {
-    //   this.products = result;
-    //   this.totalLength = result.length;
-    //
-    // })
-    //this.product = this.service.getProductByCode("1")
-    //this.url = "/products/p/" + this.product?.id;
-
+    this.getProducts(this.sortBy, this.sortDir, this.pageSize)
   }
 
+  ngOnDestroy(): void {
+    this.getAllProductSubscription?.unsubscribe();
+    this.getSortedProductSubscription?.unsubscribe();
+  }
+
+  getProducts(sortBy: string, sortDir: string, pageSize: number) {
+    this.getSortedProductSubscription = this.service.getProducts(pageSize, this.page - 1, sortBy, sortDir).subscribe(
+      (products) => {
+        products.content.forEach(product => {
+          product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
+        })
+        this.products = products.content;
+        this.totalLength = products.totalElements;
+        console.log(this.totalLength)
+        this.pageSize = products.pageable.pageSize;
+        console.log(this.pageSize)
+        this.page = products.pageable.pageNumber + 1;
+        console.log(this.page)
+
+      }
+    );
+  }
+
+  onPageChange($event: number) {
+    this.page = $event
+    this.getProducts(this.sortBy, this.sortDir, this.pageSize)
+  }
 }

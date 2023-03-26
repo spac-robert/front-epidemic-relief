@@ -1,0 +1,73 @@
+<ng-container *ngIf="cartItems.length; else emptyCartPage">
+  <div class="container">
+    <div class="card-table">
+      <div class="cart-product">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Sr.No</th>
+            <th>Product Name</th>
+            <th>Product Image</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of cartItems; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{item.product.name}}</td>
+            <td><a routerLink="/products/p/{{item.product.id}}"><img style="width: 120px;" src="{{item.product.media.url}}" alt=""></a></td>
+            <td style="width: 25%;">{{item.product.description}}</td>
+            <th style="width: 12%;">{{item.product.price}}</th>
+            <div class="quantity">
+              <button class="quantity__plus" (click)="decrementStock(item)">-</button>
+              <span class="quantity__input">{{item.quantity}}</span>
+              <button class="quantity__minus" (click)="incrementStock(item)">+</button>
+            </div>
+            <td>
+              <button (click)="removeItem(item)" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Remove</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4"></td>
+            <td>
+              <button (click)="emptyCart()" class="btn btn-danger">Empty Cart</button>
+            </td>
+            <td>
+              <button routerLink="/products" class="btn btn-primary">Shop More</button>
+            </td>
+            <td>
+<!--              <button routerLink="/cart/checkout" class="btn btn-success">Checkout</button>-->
+              <button (click)="navigate()" class="btn btn-success">Checkout</button>
+            </td>
+            <td><strong>Grand Total : ${{grandTotal}}</strong></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #emptyCartPage>
+  <div class="container-fluid  mt-100">
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <div class="card">
+          <div class="card-body cart">
+            <div class="col-sm-12 empty-cart-cls text-center">
+              <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+              <h3><strong>Your Cart is Empty</strong></h3>
+              <h4>Add something to make me happy :)</h4>
+              <a routerLink="/products" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
