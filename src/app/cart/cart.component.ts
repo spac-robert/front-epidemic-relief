@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartModel} from "../dto/cart.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -10,6 +11,8 @@ export class CartComponent implements OnInit {
   protected cartItems: CartModel[] = [];
   cartDataString = localStorage.getItem('cart_items') || '[]';
   grandTotal: number = 0;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.cartItems = JSON.parse(this.cartDataString).map((item: { product: any; quantity: any; }) => ({
@@ -54,5 +57,11 @@ export class CartComponent implements OnInit {
         this.grandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0);
       }
     }
+  }
+
+  navigate() {
+    this.router.navigate(['/cart/checkout']).then(() => {
+      window.location.reload();
+    });
   }
 }

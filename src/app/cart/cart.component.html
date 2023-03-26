@@ -39,7 +39,8 @@
               <button routerLink="/products" class="btn btn-primary">Shop More</button>
             </td>
             <td>
-              <button routerLink="/cart/checkout" class="btn btn-success">Checkout</button>
+<!--              <button routerLink="/cart/checkout" class="btn btn-success">Checkout</button>-->
+              <button (click)="navigate()" class="btn btn-success">Checkout</button>
             </td>
             <td><strong>Grand Total : ${{grandTotal}}</strong></td>
           </tr>

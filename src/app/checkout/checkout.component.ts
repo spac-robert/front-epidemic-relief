@@ -3,12 +3,13 @@ import {OrderDetails} from "../dto/product.model";
 import {CheckoutService} from "../service/checkout.service";
 
 import * as L from 'leaflet';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit{
+export class CheckoutComponent implements OnInit  {
 
   order: OrderDetails = {
     id: 0,
@@ -46,7 +47,7 @@ export class CheckoutComponent implements OnInit{
       console.log(
         `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
       );
-      let mymap = L.map('map').setView([coords.latitude,coords.longitude], 15);
+      let mymap = L.map('map').setView([coords.latitude, coords.longitude], 15);
 
       L.tileLayer(
         'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3VicmF0MDA3IiwiYSI6ImNrYjNyMjJxYjBibnIyem55d2NhcTdzM2IifQ.-NnMzrAAlykYciP4RP9zYQ',
@@ -61,14 +62,9 @@ export class CheckoutComponent implements OnInit{
         }
       ).addTo(mymap);
 
-      let marker = L.marker([coords.latitude,coords.longitude]).addTo(mymap);
-
+      let marker = L.marker([coords.latitude, coords.longitude]).addTo(mymap);
       marker.bindPopup('<b>Hi</b>').openPopup();
 
-      let popup = L.popup()
-        .setLatLng([coords.latitude,coords.longitude])
-        .setContent('I am Subrat')
-        .openOn(mymap);
     });
     this.watchPosition();
   }
@@ -90,7 +86,7 @@ export class CheckoutComponent implements OnInit{
       },
       {
         enableHighAccuracy: true,
-        timeout: 5000,
+        timeout: 0,
         maximumAge: 0,
       }
     );
