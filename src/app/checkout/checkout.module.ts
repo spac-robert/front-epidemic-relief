@@ -8,11 +8,11 @@ import {CheckoutComponent} from "./checkout.component";
   declarations: [
     CheckoutComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    HttpClientModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        HttpClientModule,
+    ]
 })
 export class CheckoutModule {
 }
