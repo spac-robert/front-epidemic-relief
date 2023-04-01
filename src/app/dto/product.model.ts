@@ -60,7 +60,7 @@ export interface OrderDetails {
   lastName: string;
   email: string;
   phoneNumber: string;
-  street: string;
+  address: string;
   city: string;
   state: string;
   zip: string;

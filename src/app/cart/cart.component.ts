@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
       quantity: item.quantity
     }));
     this.grandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0);
+    localStorage.setItem('totalPrice', JSON.stringify(this.grandTotal));
   }
 
   removeItem(cartProduct: CartModel) {
@@ -71,14 +72,7 @@ export class CartComponent implements OnInit {
       quantity: item.quantity,
       idProduct: parseInt(<string>item.product.id)
     }))
-    // // const queryParams = {
-    // //   cartItems: JSON.stringify(this.cartItems)
-    // // };
-    // this.router.navigate(['/cart/checkout'], {queryParams: queryParams});
     this.router.navigate(['/cart/checkout']);
-    // this.router.navigate(['/cart/checkout']).then(() => {
-    //   window.location.reload();
-    // });
   };
 }
 

@@ -4,6 +4,7 @@ import {CheckoutService} from "../service/checkout.service";
 
 import * as L from 'leaflet';
 import {SharedService} from "../service/shared.service";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
@@ -18,7 +19,7 @@ export class CheckoutComponent implements OnInit {
     lastName: "",
     email: "",
     phoneNumber: "",
-    street: "",
+    address: "",
     city: "",
     state: "",
     zip: "",
@@ -26,11 +27,14 @@ export class CheckoutComponent implements OnInit {
     price: 0
   }
 
-  constructor(private checkoutService: CheckoutService, private sharedService: SharedService) {
+  constructor(private checkoutService: CheckoutService, private sharedService: SharedService, private router: Router) {
   }
 
   submitForm() {
     this.checkoutService.sendOrder(this.order);
+    localStorage.removeItem('cart_items');
+    localStorage.removeItem('totalPrice');
+    this.router.navigate(['/cart/checkout/acknowledgment']);
   }
 
   ngOnInit(): void {
