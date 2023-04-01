@@ -34,7 +34,6 @@ export interface ProductModel {
 
 }
 
-//todo de facut 2 produse unnu pt salvare unu pt retrive
 export interface Media {
   uploadImageData: FormData | null;
   mime: string;
@@ -65,13 +64,12 @@ export interface OrderDetails {
   city: string;
   state: string;
   zip: string;
-  card: Card
+  products: ProductOrder[]
+  price: number
 }
 
-export interface Card {
-  cardName: string;
-  cardNumber: string;
-  expMonth: string;
-  expYear: string;
-  ccv: string;
+export interface ProductOrder {
+  quantity: number;
+  idProduct: number;
 }
+
