@@ -11,7 +11,17 @@ export class CheckoutService {
   }
 
   sendOrder(order: OrderDetails) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.http.post('http://localhost:8080/order', order, {headers});
+    let headerOption = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    this.http.post<any>('http://localhost:8080/order', order, headerOption).subscribe(
+      response => {
+        console.log(response); // handle successful response here
+      },
+      error => {
+        console.log(error); // handle error response here
+      }
+    );
   }
+
 }
