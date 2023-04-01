@@ -37,7 +37,7 @@
 
     <div class='form-group mb-1'>
       <label class='mb-1'>Street</label>
-      <input class='form-control' type='text' id='street1' [(ngModel)]="order.street" name="street">
+      <input class='form-control' type='text' id='street1' [(ngModel)]="order.address" name="street">
     </div>
 
     <div class='form-group mb-1'>
@@ -57,55 +57,7 @@
       </div>
     </div>
 
-<!--    <h5>Card Info</h5>-->
-
-<!--    <hr class='mb-1'>-->
-
-<!--    <div class='form-group mb-1'>-->
-<!--      <label class='mb-1' for='nameOnCard'>Name on card</label>-->
-<!--      <input class='form-control' id='nameOnCard' [(ngModel)]="order.card.cardName">-->
-<!--    </div>-->
-
-<!--    <div class='form-group mb-1'>-->
-<!--      <label class='mb-1' for='cardNum'>Card number</label>-->
-<!--      <input class='form-control' id='cardNum' placeholder="1111 2222 3333 4444" [(ngModel)]="order.card.cardNumber">-->
-<!--    </div>-->
-
     <div class='form-row mb-1'>
-<!--      <div class='col'>-->
-<!--        <label class='mb-0' for='expMonth'>Expiration Month</label>-->
-<!--        <select class='form-control' id='expMonth' [(ngModel)]="order.card.expMonth">-->
-<!--          <option value='01'>Jan</option>-->
-<!--          <option value='02'>Feb</option>-->
-<!--          <option value='03'>March</option>-->
-<!--          <option value='04'>April</option>-->
-<!--          <option value='05'>May</option>-->
-<!--          <option value='06'>June</option>-->
-<!--          <option value='07'>July</option>-->
-<!--          <option value='08'>Aug</option>-->
-<!--          <option value='09'>Sept</option>-->
-<!--          <option value='10'>Oct</option>-->
-<!--          <option value='11'>Nov</option>-->
-<!--          <option value='12'>Dec</option>-->
-<!--        </select>-->
-<!--      </div>-->
-<!--      <div class='col'>-->
-<!--        <label class='mb-0' for='expYear'>Exp Year</label>-->
-<!--        <select class='form-control' id='expYear' [(ngModel)]="order.card.expYear">-->
-<!--          <option value='2023'>2030</option>-->
-<!--          <option value='2023'>2029</option>-->
-<!--          <option value='2023'>2028</option>-->
-<!--          <option value='2023'>2027</option>-->
-<!--          <option value='2023'>2026</option>-->
-<!--          <option value='2023'>2025</option>-->
-<!--          <option value='2023'>2024</option>-->
-<!--          <option value='2023'>2023</option>-->
-<!--        </select>-->
-<!--      </div>-->
-<!--      <div class='col'>-->
-<!--        <label class='mb-0' for='ccv'>CCV</label>-->
-<!--        <input placeholder='* * * *' class='form-control' id='ccv' [(ngModel)]="order.card.ccv">-->
-<!--      </div>-->
       <button class='btn btn-primary mt-4' type='submit' (click)="submitForm()"><i class="fas fa-lock mr-2"></i>Submit
         Payment
       </button>
@@ -120,4 +72,3 @@
           crossorigin=""></script>
     <div id="map" class="map"></div>
 </div>
-Aici dupa ce da pe submit payment, o sa se trimita un email de comfirmare( impreuna cu numarul comenzii). Apoi o sa apara un popup cu (ty for your purchase)
