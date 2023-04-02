@@ -8,6 +8,7 @@ import {CartComponent} from "./cart/cart.component";
 import {AddLotComponent} from "./products/component/add-lot/add-lot.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {AcknowledgmentComponent} from "./acknowledgment/component/acknowledgment.component";
+import {LoginComponent} from "./login/component/login.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -18,6 +19,8 @@ const routes: Routes = [
   {path: 'product/add/lot', component: AddLotComponent},
   {path: 'cart/checkout', component: CheckoutComponent},
   {path: 'cart/checkout/acknowledgment', component: AcknowledgmentComponent},
+  {path: 'oauth2/redirect', component: LoginComponent}
+
 ];
 
 @NgModule({

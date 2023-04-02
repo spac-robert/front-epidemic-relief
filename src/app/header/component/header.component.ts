@@ -9,4 +9,5 @@ export class HeaderComponent {
   homeUrl = '';
   productsUrl = '/products';
   cartUrl = '/cart';
+  loginUrl = '/oauth2/redirect';
 }
