@@ -34,6 +34,9 @@ export class AddProductComponent implements OnInit {
   selectedFile!: File;
   retrievedImage: any;
   uploadImageData?: FormData;
+  formValid: boolean = true;
+  isSubmitted = false;
+  errorMessage: string = "";
 
 
   constructor(private service: ProductService) {
@@ -52,14 +55,22 @@ export class AddProductComponent implements OnInit {
   }
 
   submitForm() {
-    this.uploadImageData?.append('description', this.product.description);
-    this.uploadImageData?.append('name', this.product.name);
-    this.uploadImageData?.append('price', this.product.price.toString());
-    //this.uploadImageData?.append('stock', this.product.stock.toString());
-    this.uploadImageData?.append('manufacturer', this.product.manufacturer);
-   // this.uploadImageData?.append('expirationDate', this.product.expirationDate);
+    this.formValid = this.isFormValid();
+    if(this.isFormValid()) {
+      this.uploadImageData?.append('description', this.product.description);
+      this.uploadImageData?.append('name', this.product.name);
+      this.uploadImageData?.append('price', this.product.price.toString());
+      this.uploadImageData?.append('manufacturer', this.product.manufacturer);
 
-    this.service.addProduct(this.uploadImageData)
+      this.service.addProduct(this.uploadImageData)
+      this.isSubmitted = true;
+    }else {
+      this.isSubmitted = false;
+      this.errorMessage = "Please make sure the quantity is greater than 0 and the expiration date is in the future.";
+    }
   }
 
+  isFormValid(): boolean {
+    return !!this.product.name && !!this.product.manufacturer && !!this.product.price && !!this.product.description;
+  }
 }
