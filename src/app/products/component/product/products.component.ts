@@ -22,13 +22,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
   url = "/products/p/"
 
   products: ProductModel[] | undefined;
-
+  searchQuery: string = '';
 
   constructor(private service: ProductService, private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    this.getProducts(this.sortBy, this.sortDir, this.pageSize)
+    if (this.searchQuery.trim() === '') {
+      this.getProducts(this.sortBy, this.sortDir, this.pageSize)
+    }
   }
 
   ngOnDestroy(): void {
@@ -37,25 +39,47 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   getProducts(sortBy: string, sortDir: string, pageSize: number) {
-    this.getSortedProductSubscription = this.service.getProducts(pageSize, this.page - 1, sortBy, sortDir).subscribe(
+    let request;
+    if (this.searchQuery && this.searchQuery.trim() !== '') {
+      request = this.service.searchProducts(this.searchQuery, sortBy, sortDir, pageSize, this.page - 1);
+    } else {
+      request = this.service.getProducts(pageSize, this.page - 1, sortBy, sortDir);
+    }
+
+    this.getSortedProductSubscription = request.subscribe(
       (products) => {
         products.content.forEach(product => {
           product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
         })
         this.products = products.content;
         this.totalLength = products.totalElements;
-        console.log(this.totalLength)
         this.pageSize = products.pageable.pageSize;
-        console.log(this.pageSize)
         this.page = products.pageable.pageNumber + 1;
-        console.log(this.page)
-
       }
     );
   }
 
   onPageChange($event: number) {
     this.page = $event
-    this.getProducts(this.sortBy, this.sortDir, this.pageSize)
+    if (this.searchQuery.trim() === '') {
+      this.getProducts(this.sortBy, this.sortDir, this.pageSize)
+    }
+  }
+
+  searchProducts() {
+    if (this.searchQuery.trim() === '') {
+      this.getProducts(this.sortBy, this.sortDir, this.pageSize)
+    }
+    this.service.searchAllProducts(this.searchQuery).subscribe(
+      (products: ProductModel[]) => {
+        this.products = products;
+        this.products.forEach(product => {
+          product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data;
+        });
+      },
+      (error: any) => {
+        console.error('Failed to search products:', error);
+      }
+    );
   }
 }

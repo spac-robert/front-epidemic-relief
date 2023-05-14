@@ -44,7 +44,7 @@ export class ProductService {
   }
 
   getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<Page<ProductModel>> {
-    let url = "http://localhost:8080/products";
+    let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
     return this.http.get<Page<ProductModel>>(url);
   }
 
@@ -81,5 +81,19 @@ export class ProductService {
     this.http.post('http://localhost:8080/products/add/lot', lotData).subscribe(data => {
       console.log(data);
     });
+  }
+
+  searchAllProducts(searchQuery: string) {
+    const params = {query: searchQuery};
+    let url = "http://localhost:8080/products/search";
+    return this.http.get<ProductModel[]>(url, {params: params});
+  }
+
+  searchProducts(searchQuery: string, sortBy: string, sortDir: string, pageSize: number, pageNumber: number): Observable<Page<ProductModel>> {
+    let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir;
+    if (searchQuery && searchQuery.trim() !== '') {
+      url += "&searchQuery=" + encodeURIComponent(searchQuery);
+    }
+    return this.http.get<Page<ProductModel>>(url);
   }
 }
