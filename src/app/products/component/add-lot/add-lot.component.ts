@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Lot} from "../../../dto/product.model";
+import {Lot, ProductModel} from "../../../dto/product.model";
 import {ProductService} from "../../../service/product.service";
 import {generateLotId} from "../../../utils/utils";
 
@@ -22,12 +22,13 @@ export class AddLotComponent implements OnInit {
   isSubmitted: boolean = false;
   errorMessage: string = "";
   formValid: boolean = true;
+  productList: ProductModel[] = [];
 
   constructor(private service: ProductService) {
   }
 
   ngOnInit(): void {
-
+    this.fetchProducts();
   }
 
   submitForm() {
@@ -54,4 +55,16 @@ export class AddLotComponent implements OnInit {
     return quantity > 0 && expirationDate > this.currentDate;
   }
 
+  fetchProducts() {
+    this.service.getAllProducts().subscribe(
+      (products: ProductModel[]) => {
+        this.productList = products;
+        console.log(this.productList);
+      },
+      (error) => {
+        console.error('Failed to fetch products:', error);
+        this.productList = [];
+      }
+    );
+  }
 }

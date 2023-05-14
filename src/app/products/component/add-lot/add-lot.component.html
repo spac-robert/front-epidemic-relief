@@ -1,11 +1,17 @@
 <div class="container">
   <div class="container">
     <form>
-      <label for="idProduct">Id Product:</label><br>
-      <input type="number" id="idProduct" [(ngModel)]="lot.productId" name="idProduct"><br>
+      <!--      <label for="idProduct">Id Product:</label><br>-->
+      <!--      <input type="number" id="idProduct" [(ngModel)]="lot.productId" name="idProduct">-->
+      <label for="idProduct">Product Name:</label><br>
+      <select id="idProduct" [(ngModel)]="lot.productId" name="idProduct" *ngIf="productList">
+        <option *ngFor="let product of productList" [value]="product.id">{{ product.name }}</option>
+      </select>
+      <br>
       <br>
       <label for="expiration-date">Expiration Date:</label><br>
-      <input type="date" id="expiration-date" [(ngModel)]="lot.expirationDate" name="expiration-date" min="{{ currentDate | date:'yyyy-MM-dd' }}" (change)="isFormValid()">
+      <input type="date" id="expiration-date" [(ngModel)]="lot.expirationDate" name="expiration-date"
+             min="{{ currentDate | date:'yyyy-MM-dd' }}" (change)="isFormValid()">
       <br>
       <br>
       <label for="quantity">Quantity:</label><br>

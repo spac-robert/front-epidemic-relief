@@ -38,7 +38,7 @@ export class AddProductComponent implements OnInit {
   isSubmitted = false;
   errorMessage: string = "";
 
-
+//TODO dupa ce dau submit si totul este ok, sa imi apara un pop-up ca produsul a fosta daugat cu succes,
   constructor(private service: ProductService) {
   }
 
@@ -56,7 +56,7 @@ export class AddProductComponent implements OnInit {
 
   submitForm() {
     this.formValid = this.isFormValid();
-    if(this.isFormValid()) {
+    if (this.isFormValid()) {
       this.uploadImageData?.append('description', this.product.description);
       this.uploadImageData?.append('name', this.product.name);
       this.uploadImageData?.append('price', this.product.price.toString());
@@ -64,7 +64,7 @@ export class AddProductComponent implements OnInit {
 
       this.service.addProduct(this.uploadImageData)
       this.isSubmitted = true;
-    }else {
+    } else {
       this.isSubmitted = false;
       this.errorMessage = "Please make sure the quantity is greater than 0 and the expiration date is in the future.";
     }

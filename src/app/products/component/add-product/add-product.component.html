@@ -18,7 +18,7 @@
       <input type="text" id="manufacturer" [(ngModel)]="product.manufacturer" name="manufacturer"><br>
       <br>
       <label for="price">Price:</label><br>
-      <input type="number" id="price" [(ngModel)]="product.price" name="price" min="0">
+      <input type="number" id="price" [(ngModel)]="product.price" name="price" min="0" step="0.1">
       <br><br>
       <button (click)="submitForm()">Submit</button>
       <div *ngIf="!formValid">

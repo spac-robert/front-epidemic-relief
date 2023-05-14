@@ -43,13 +43,14 @@ export class ProductService {
       );
   }
 
-  // getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<ProductModel[]> {
-  //   let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
-  //   return this.http.get<ProductModel[]>(url);
-  // }
   getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<Page<ProductModel>> {
-    let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
+    let url = "http://localhost:8080/products";
     return this.http.get<Page<ProductModel>>(url);
+  }
+
+  getAllProducts(): Observable<ProductModel[]> {
+    let url = "http://localhost:8080/products/all";
+    return this.http.get<ProductModel[]>(url);
   }
 
   //todo refactor to move logic to component
