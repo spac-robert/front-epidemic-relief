@@ -2,41 +2,48 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 50px;
 }
-.product {
+
+.container form {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 300px;
-  margin: 10px;
+  max-width: 600px;
   padding: 20px;
-  border: 1px solid #ccc;
+  background-color: #f5f5f5;
   border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-.product img {
-  width: 150px;
-  margin-right: 20px;
+.container form label {
+  font-weight: bold;
 }
 
-.product h2 {
-  font-size: 18px;
+.container form input[type="number"],
+.container form input[type="date"] {
+  width: 100%;
+  padding: 8px 16px;
   margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: inherit;
 }
 
-.product .price {
-  font-size: 20px;
-  color: #f00;
-  margin-bottom: 10px;
-}
-
-.product button {
+.container form button {
   background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
+  color: #fff;
+  padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.container form button:hover {
+  background-color: #3e8e41;
 }

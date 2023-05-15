@@ -5,7 +5,7 @@
 </div>
 
 <div class="container">
-  <div class="container">
+  <div>
     <form>
       <label for="product-name">Product Name:</label><br>
       <input type="text" id="product-name" [(ngModel)]="product.name" name="product-name"><br>
@@ -14,20 +14,16 @@
       <textarea id="description" [(ngModel)]="product.description" name="description"></textarea>
       <br>
       <br>
-<!--      <label for="expiration-date">Expiration Date:</label><br>-->
-<!--      <input type="date" id="expiration-date" [(ngModel)]="product.expirationDate" name="expiration-date">-->
-<!--      <br>-->
-<!--      <br>-->
       <label for="manufacturer">Manufacturer:</label><br>
       <input type="text" id="manufacturer" [(ngModel)]="product.manufacturer" name="manufacturer"><br>
       <br>
       <label for="price">Price:</label><br>
-      <input type="number" id="price" [(ngModel)]="product.price" name="price">
+      <input type="number" id="price" [(ngModel)]="product.price" name="price" min="0" step="0.1">
       <br><br>
-<!--      <label for="stock">Stock:</label><br>-->
-<!--      <input type="number" id="stock" [(ngModel)]="product.stock" name="stock">-->
-<!--      <br><br>-->
       <button (click)="submitForm()">Submit</button>
+      <div *ngIf="!formValid">
+        <span style="color: red;">Please enter valid information for all fields</span>
+      </div>
     </form>
   </div>
 

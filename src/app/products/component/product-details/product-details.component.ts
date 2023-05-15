@@ -24,12 +24,18 @@ export class ProductDetailsComponent implements OnInit {
     if (code != null) {
       this.product = this.service.getProductByCode(code);
     }
-    this.cartItems = JSON.parse(this.cartDataString).map((item: { product: any; quantity: any; }) => ({ product: item.product, quantity: item.quantity }));
+    this.cartItems = JSON.parse(this.cartDataString).map((item: {
+      product: any;
+      quantity: any;
+    }) => ({product: item.product, quantity: item.quantity}));
   }
 
   incrementStock() {
-    //TODO validare sa nu depaseasca mai mult de stock-ul produsului
-    this.stock++;
+    if (this.product?.stock) {
+      if (this.stock < this.product?.stock) {
+        this.stock++;
+      }
+    }
   }
 
   decrementStock() {

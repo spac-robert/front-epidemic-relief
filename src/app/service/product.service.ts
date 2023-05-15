@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 export class ProductService {
   defaultProduct: ProductModel = {
     name: '',
-    //stock: 0,
+    stock: 0,
     description: '',
     // expirationDate: '',
     manufacturer: '',
@@ -43,13 +43,14 @@ export class ProductService {
       );
   }
 
-  // getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<ProductModel[]> {
-  //   let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
-  //   return this.http.get<ProductModel[]>(url);
-  // }
   getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<Page<ProductModel>> {
     let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir
     return this.http.get<Page<ProductModel>>(url);
+  }
+
+  getAllProducts(): Observable<ProductModel[]> {
+    let url = "http://localhost:8080/products/all";
+    return this.http.get<ProductModel[]>(url);
   }
 
   //todo refactor to move logic to component
@@ -61,10 +62,11 @@ export class ProductService {
           this.retrieveResponse = res;
           this.base64Data = this.retrieveResponse.mediaUrl.data;
           this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-          this.product.media.url = this.retrievedImage
-          this.product.name = this.retrieveResponse.name
+          this.product.media.url = this.retrievedImage;
+          this.product.name = this.retrieveResponse.name;
           this.product.price = this.retrieveResponse.price;
-          this.product.description = this.retrieveResponse.description
+          this.product.description = this.retrieveResponse.description;
+          this.product.stock = this.retrieveResponse.stock;
           // this.product.expirationDate = this.retrieveResponse.expirationDate;
           this.product.id = this.retrieveResponse.id;
         }
@@ -80,5 +82,19 @@ export class ProductService {
     this.http.post('http://localhost:8080/products/add/lot', lotData).subscribe(data => {
       console.log(data);
     });
+  }
+
+  searchAllProducts(searchQuery: string) {
+    const params = {query: searchQuery};
+    let url = "http://localhost:8080/products/search";
+    return this.http.get<ProductModel[]>(url, {params: params});
+  }
+
+  searchProducts(searchQuery: string, sortBy: string, sortDir: string, pageSize: number, pageNumber: number): Observable<Page<ProductModel>> {
+    let url = "http://localhost:8080/products?pageSize=" + pageSize + "&pageNo=" + pageNumber + "&sortBy=" + sortBy + "&sortDir=" + sortDir;
+    if (searchQuery && searchQuery.trim() !== '') {
+      url += "&searchQuery=" + encodeURIComponent(searchQuery);
+    }
+    return this.http.get<Page<ProductModel>>(url);
   }
 }
