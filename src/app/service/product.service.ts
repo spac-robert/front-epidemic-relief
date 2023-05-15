@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 export class ProductService {
   defaultProduct: ProductModel = {
     name: '',
-    //stock: 0,
+    stock: 0,
     description: '',
     // expirationDate: '',
     manufacturer: '',
@@ -62,10 +62,11 @@ export class ProductService {
           this.retrieveResponse = res;
           this.base64Data = this.retrieveResponse.mediaUrl.data;
           this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-          this.product.media.url = this.retrievedImage
-          this.product.name = this.retrieveResponse.name
+          this.product.media.url = this.retrievedImage;
+          this.product.name = this.retrieveResponse.name;
           this.product.price = this.retrieveResponse.price;
-          this.product.description = this.retrieveResponse.description
+          this.product.description = this.retrieveResponse.description;
+          this.product.stock = this.retrieveResponse.stock;
           // this.product.expirationDate = this.retrieveResponse.expirationDate;
           this.product.id = this.retrieveResponse.id;
         }

@@ -13,7 +13,7 @@ export class AddProductComponent implements OnInit {
 
   product: ProductModel = {
     name: '',
-    // stock: 0,
+    stock: 0,
     description: '',
     // expirationDate: '',
     manufacturer: '',

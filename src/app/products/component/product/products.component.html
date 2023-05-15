@@ -30,6 +30,7 @@
           <a [routerLink]="url+product.id">
             <div>
               <img [src]="product.image" alt="Product Image">
+              <div class="out-of-stock" *ngIf="product.stock === 0">Out of Stock</div>
             </div>
             <div>
               <h2>{{product.name}}</h2>
