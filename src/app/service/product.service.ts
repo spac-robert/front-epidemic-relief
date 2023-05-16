@@ -28,7 +28,6 @@ export class ProductService {
   }
   products: ProductModel[] = [];
   product = this.defaultProduct
-  product$: Observable<ProductModel> | undefined
   retrievedImage: any;
   private retrieveResponse: any;
   private base64Data: any;
@@ -53,7 +52,6 @@ export class ProductService {
     return this.http.get<ProductModel[]>(url);
   }
 
-  //todo refactor to move logic to component
   getProductByCode(code: string): ProductModel {
 
     this.http.get<ProductModel>('http://localhost:8080/products/' + code)

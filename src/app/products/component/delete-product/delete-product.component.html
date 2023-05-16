@@ -1,13 +1,11 @@
 <div class="container">
-  <div>
-    <form>
-      <label for="productNameList">Product Name:</label><br>
-      <select id="productNameList" [(ngModel)]="productToDelete.name" name="productNameList"
-              (change)="onSelectProduct(productToDelete.name)" *ngIf="productList" style="width: 500px;">
-        <option *ngFor="let product of productList" [value]="product.name">{{ product.name }}</option>
-      </select>
-    </form>
-    <div *ngIf="!isEmpty()" class="product-table">
+  <div style="margin-top:3%">
+      <div class="center-div">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search products" [(ngModel)]="searchQuery" (keydown.enter)="searchProducts()">
+        </div>
+      </div>
+    <div class="product-table">
       <table>
         <tr>
           <th>Image</th>
@@ -17,17 +15,18 @@
           <th>Price</th>
           <th></th>
         </tr>
-        <tr>
-          <td><img [src]="productToDelete.media.url" alt="Product Image" height="100"></td>
-          <td>{{ productToDelete.name }}</td>
-          <td>{{ productToDelete.description }}</td>
-          <td>{{ productToDelete.manufacturer }}</td>
-          <td>{{ productToDelete.price }}</td>
+        <tr *ngFor="let product of productListPage | paginate:{itemsPerPage:pageSize,currentPage:page,totalItems:totalLength}">
+          <td><img [src]="product.image" alt="Product Image" height="100"></td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.manufacturer }}</td>
+          <td>{{ product.price }}</td>
           <td>
-            <button (click)="submitForm()">Delete</button>
+            <button (click)="submitForm(product)">Delete</button>
           </td>
         </tr>
       </table>
+      <pagination-controls class="text-center" (pageChange)="onPageChange($event)"></pagination-controls>
     </div>
     <div *ngIf="!formValid">
       <span style="color: red;">Please enter valid information for all fields</span>
