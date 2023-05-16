@@ -43,5 +43,8 @@
       </div>
     </div>
   </div>
+  <div *ngIf="!products || products.length === 0" class="text-center">
+    <p>No products found.</p>
+  </div>
   <pagination-controls class="text-center" (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
