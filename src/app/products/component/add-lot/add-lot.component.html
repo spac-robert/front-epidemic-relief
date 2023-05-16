@@ -1,8 +1,6 @@
 <div class="container">
   <div class="container">
     <form>
-      <!--      <label for="idProduct">Id Product:</label><br>-->
-      <!--      <input type="number" id="idProduct" [(ngModel)]="lot.productId" name="idProduct">-->
       <label for="idProduct">Product Name:</label><br>
       <select id="idProduct" [(ngModel)]="lot.productId" name="idProduct" *ngIf="productList">
         <option *ngFor="let product of productList" [value]="product.id">{{ product.name }}</option>
