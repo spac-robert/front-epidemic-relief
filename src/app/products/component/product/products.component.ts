@@ -67,19 +67,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   searchProducts() {
-    if (this.searchQuery.trim() === '') {
-      this.getProducts(this.sortBy, this.sortDir, this.pageSize)
-    }
-    this.service.searchAllProducts(this.searchQuery).subscribe(
-      (products: ProductModel[]) => {
-        this.products = products;
-        this.products.forEach(product => {
-          product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data;
-        });
-      },
-      (error: any) => {
-        console.error('Failed to search products:', error);
-      }
-    );
+    this.getProducts(this.sortBy, this.sortDir, this.pageSize)
   }
 }
