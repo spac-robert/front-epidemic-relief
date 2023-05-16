@@ -1,0 +1,36 @@
+<div class="container">
+  <div>
+    <form>
+      <label for="productNameList">Product Name:</label><br>
+      <select id="productNameList" [(ngModel)]="productToDelete.name" name="productNameList"
+              (change)="onSelectProduct(productToDelete.name)" *ngIf="productList" style="width: 500px;">
+        <option *ngFor="let product of productList" [value]="product.name">{{ product.name }}</option>
+      </select>
+    </form>
+    <div *ngIf="!isEmpty()" class="product-table">
+      <table>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Manufacturer</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td><img [src]="productToDelete.media.url" alt="Product Image" height="100"></td>
+          <td>{{ productToDelete.name }}</td>
+          <td>{{ productToDelete.description }}</td>
+          <td>{{ productToDelete.manufacturer }}</td>
+          <td>{{ productToDelete.price }}</td>
+          <td>
+            <button (click)="submitForm()">Delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="!formValid">
+      <span style="color: red;">Please enter valid information for all fields</span>
+    </div>
+  </div>
+</div>

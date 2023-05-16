@@ -106,4 +106,16 @@ export class ProductService {
         }
       );
   }
+
+  deleteProduct(id: string | undefined) {
+    let url = `http://localhost:8080/products/delete/${id}`;
+    this.http.delete(url).subscribe(
+      () => {
+        // Handle successful deletion, e.g., show a success message or update the product list
+      },
+      (error) => {
+        // Handle error, e.g., show an error message
+      }
+    );
+  }
 }
