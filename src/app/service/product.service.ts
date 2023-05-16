@@ -54,7 +54,7 @@ export class ProductService {
   }
 
   //todo refactor to move logic to component
-  getProductByCode(code: string): ProductModel | undefined {
+  getProductByCode(code: string): ProductModel {
 
     this.http.get<ProductModel>('http://localhost:8080/products/' + code)
       .subscribe(
@@ -67,6 +67,7 @@ export class ProductService {
           this.product.price = this.retrieveResponse.price;
           this.product.description = this.retrieveResponse.description;
           this.product.stock = this.retrieveResponse.stock;
+          this.product.manufacturer = this.retrieveResponse.manufacturer;
           // this.product.expirationDate = this.retrieveResponse.expirationDate;
           this.product.id = this.retrieveResponse.id;
         }
@@ -96,5 +97,13 @@ export class ProductService {
       url += "&searchQuery=" + encodeURIComponent(searchQuery);
     }
     return this.http.get<Page<ProductModel>>(url);
+  }
+
+  updateProduct(productUpdate: FormData | undefined) {
+    let url = "http://localhost:8080/products/update";
+    this.http.put(url, productUpdate, {observe: 'response'})
+      .subscribe((response) => {
+        }
+      );
   }
 }

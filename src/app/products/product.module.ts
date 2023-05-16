@@ -9,12 +9,14 @@ import {EffectsModule} from "@ngrx/effects";
 import {ProductEffects} from "../store/effects/product.effects";
 import {productReducer} from "../store/reducer/product.reducer";
 import { AddLotComponent } from './component/add-lot/add-lot.component';
+import {UpdateProductComponent} from "./component/update-product/update-product.component";
 
 
 @NgModule({
   declarations: [
     ProductsComponent,
     AddLotComponent,
+    UpdateProductComponent
   ],
   imports: [
     CommonModule,

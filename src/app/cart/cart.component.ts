@@ -15,13 +15,16 @@ export class CartComponent implements OnInit {
 
   constructor(private router: Router, private sharedService: SharedService) {
   }
+  //TODO sa se adauge un sg produs, nu de 2 ori
 
   ngOnInit(): void {
     this.cartItems = JSON.parse(this.cartDataString).map((item: { product: any; quantity: any; }) => ({
       product: item.product,
       quantity: item.quantity
     }));
-    this.grandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0);
+
+    const formattedGrandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0).toFixed(2);
+    this.grandTotal = parseFloat(formattedGrandTotal);
     localStorage.setItem('totalPrice', JSON.stringify(this.grandTotal));
   }
 
@@ -30,7 +33,8 @@ export class CartComponent implements OnInit {
     if (index !== -1) {
       this.cartItems.splice(index, 1);
       localStorage.setItem('cart_items', JSON.stringify(this.cartItems));
-      this.grandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0);
+      const formattedGrandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0).toFixed(2);
+      this.grandTotal = parseFloat(formattedGrandTotal);
       localStorage.setItem('totalPrice', JSON.stringify(this.grandTotal));
     }
   }
@@ -43,12 +47,14 @@ export class CartComponent implements OnInit {
 
   incrementStock(item: CartModel) {
     const index = this.cartItems.findIndex(cartProduct => cartProduct.product.id === item.product.id);
-    //TODO validare sa nu depaseasca mai mult de stock-ul produsului
-    item.quantity++;
+    if (item.quantity < item.product.stock) {
+      item.quantity++;
+    }
 
     this.cartItems[index] = item;
     localStorage.setItem('cart_items', JSON.stringify(this.cartItems));
-    this.grandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0);
+    const formattedGrandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0).toFixed(2);
+    this.grandTotal = parseFloat(formattedGrandTotal);
     localStorage.setItem('totalPrice', JSON.stringify(this.grandTotal));
   }
 
@@ -61,7 +67,8 @@ export class CartComponent implements OnInit {
       } else {
         this.cartItems[index] = item;
         localStorage.setItem('cart_items', JSON.stringify(this.cartItems));
-        this.grandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0);
+        const formattedGrandTotal = this.cartItems.reduce((accumulator, item) => accumulator + (item.product.price * item.quantity), 0).toFixed(2);
+        this.grandTotal = parseFloat(formattedGrandTotal);
         localStorage.setItem('totalPrice', JSON.stringify(this.grandTotal));
       }
     }

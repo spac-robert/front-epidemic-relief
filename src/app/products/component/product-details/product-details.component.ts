@@ -45,9 +45,15 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(product: ProductModel, quantity: number) {
-    this.stock = 0;
-    const item: CartModel = {quantity, product}
-    this.cartItems.push(item);
+    const existingItem = this.cartItems.find(item => item.product.id === product.id);
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      const item: CartModel = { quantity, product };
+      this.cartItems.push(item);
+    }
+
     this.saveCart();
   }
 
