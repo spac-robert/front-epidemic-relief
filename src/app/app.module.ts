@@ -13,6 +13,7 @@ import {CartComponent} from './cart/cart.component';
 import {OrderComponent} from './order/order.component';
 import {FormsModule} from "@angular/forms";
 import {CheckoutModule} from "./checkout/checkout.module";
+import {FooterModule} from "./footer/footer.module";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {CheckoutModule} from "./checkout/checkout.module";
     //TODO aici nu stiu daca trebuie sa fac asa
     //StoreModule.forRoot({products:productReducer})
     StoreModule.forRoot({}),
-    FormsModule
+    FormsModule,
+    FooterModule
 
   ],
   providers: [],

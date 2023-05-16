@@ -75,7 +75,6 @@ export class UpdateProductComponent implements OnInit {
     );
   }
 
-  //todo sa verific de ce nu se salveaza imaginea curenta si dupa sa vad daca se salveaza imaginea pe care o aleg
   submitForm() {
     this.formValid = this.isFormValid();
     if (this.isFormValid()) {

@@ -8,15 +8,17 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {ProductEffects} from "../store/effects/product.effects";
 import {productReducer} from "../store/reducer/product.reducer";
-import { AddLotComponent } from './component/add-lot/add-lot.component';
+import {AddLotComponent} from './component/add-lot/add-lot.component';
 import {UpdateProductComponent} from "./component/update-product/update-product.component";
+import {DeleteProductComponent} from "./component/delete-product/delete-product.component";
 
 
 @NgModule({
   declarations: [
     ProductsComponent,
     AddLotComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    DeleteProductComponent
   ],
   imports: [
     CommonModule,

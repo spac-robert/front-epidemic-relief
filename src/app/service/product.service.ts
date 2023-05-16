@@ -28,7 +28,6 @@ export class ProductService {
   }
   products: ProductModel[] = [];
   product = this.defaultProduct
-  product$: Observable<ProductModel> | undefined
   retrievedImage: any;
   private retrieveResponse: any;
   private base64Data: any;
@@ -53,7 +52,6 @@ export class ProductService {
     return this.http.get<ProductModel[]>(url);
   }
 
-  //todo refactor to move logic to component
   getProductByCode(code: string): ProductModel {
 
     this.http.get<ProductModel>('http://localhost:8080/products/' + code)
@@ -105,5 +103,17 @@ export class ProductService {
       .subscribe((response) => {
         }
       );
+  }
+
+  deleteProduct(id: string | undefined) {
+    let url = `http://localhost:8080/products/delete/${id}`;
+    this.http.delete(url).subscribe(
+      () => {
+        // Handle successful deletion, e.g., show a success message or update the product list
+      },
+      (error) => {
+        // Handle error, e.g., show an error message
+      }
+    );
   }
 }
