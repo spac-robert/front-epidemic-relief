@@ -11,6 +11,8 @@ import {AcknowledgmentComponent} from "./acknowledgment/component/acknowledgment
 import {UpdateProductComponent} from "./products/component/update-product/update-product.component";
 import {DeleteProductComponent} from "./products/component/delete-product/delete-product.component";
 import {SubscriptionPageComponent} from "./subscription-page/subscription-page.component";
+import {LoginComponent} from "./login/login.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -24,6 +26,8 @@ const routes: Routes = [
   {path: 'product/update', component: UpdateProductComponent},
   {path: 'product/delete', component: DeleteProductComponent},
   {path: 'subscription', component: SubscriptionPageComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'profile', component: ProfileComponent},
 ];
 
 @NgModule({

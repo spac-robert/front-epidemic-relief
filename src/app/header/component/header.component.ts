@@ -9,4 +9,6 @@ export class HeaderComponent {
   homeUrl = '';
   productsUrl = '/products';
   cartUrl = '/cart';
+  loginUrl = '/login';
+  profileUrl = '/profile';
 }

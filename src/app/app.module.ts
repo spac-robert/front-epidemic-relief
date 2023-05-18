@@ -15,6 +15,8 @@ import {FormsModule} from "@angular/forms";
 import {CheckoutModule} from "./checkout/checkout.module";
 import {FooterModule} from "./footer/footer.module";
 import {SubscriptionPageComponent} from "./subscription-page/subscription-page.component";
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {SubscriptionPageComponent} from "./subscription-page/subscription-page.c
     ProductDetailsComponent,
     CartComponent,
     OrderComponent,
-    SubscriptionPageComponent
+    SubscriptionPageComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
