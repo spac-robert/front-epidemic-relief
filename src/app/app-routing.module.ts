@@ -13,6 +13,7 @@ import {DeleteProductComponent} from "./products/component/delete-product/delete
 import {SubscriptionPageComponent} from "./subscription-page/subscription-page.component";
 import {LoginComponent} from "./login/login.component";
 import {ProfileComponent} from "./profile/profile.component";
+import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -26,8 +27,9 @@ const routes: Routes = [
   {path: 'product/update', component: UpdateProductComponent},
   {path: 'product/delete', component: DeleteProductComponent},
   {path: 'subscription', component: SubscriptionPageComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'auth/login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'auth/register', component: RegisterComponent},
 ];
 
 @NgModule({

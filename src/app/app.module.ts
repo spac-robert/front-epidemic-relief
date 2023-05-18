@@ -17,6 +17,7 @@ import {FooterModule} from "./footer/footer.module";
 import {SubscriptionPageComponent} from "./subscription-page/subscription-page.component";
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProfileComponent } from './profile/profile.component';
     OrderComponent,
     SubscriptionPageComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
