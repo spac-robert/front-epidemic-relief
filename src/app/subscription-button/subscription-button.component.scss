@@ -1,0 +1,28 @@
+.floating-button {
+  position: fixed;
+  top: 10%;
+  right: 20px;
+  padding: 10px;
+  color: white;
+  border: none;
+  border-radius: 30%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.button-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.button-text {
+  color: #000000;
+}
+
+.floating-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

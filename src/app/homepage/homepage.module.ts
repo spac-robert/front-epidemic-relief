@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HomepageComponent} from "./component/homepage.component";
 import {BannerModule} from "../banner/banner.module";
 import {FooterModule} from "../footer/footer.module";
+import {SubscriptionButtonModule} from "../subscription-button/subscription-button.module";
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import {FooterModule} from "../footer/footer.module";
   imports: [
     CommonModule,
     BannerModule,
-    FooterModule
+    FooterModule,
+    SubscriptionButtonModule
   ]
 })
-export class HomepageModule { }
+export class HomepageModule {
+}

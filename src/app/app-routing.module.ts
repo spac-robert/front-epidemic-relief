@@ -10,6 +10,7 @@ import {CheckoutComponent} from "./checkout/checkout.component";
 import {AcknowledgmentComponent} from "./acknowledgment/component/acknowledgment.component";
 import {UpdateProductComponent} from "./products/component/update-product/update-product.component";
 import {DeleteProductComponent} from "./products/component/delete-product/delete-product.component";
+import {SubscriptionPageComponent} from "./subscription-page/subscription-page.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'cart/checkout/acknowledgment', component: AcknowledgmentComponent},
   {path: 'product/update', component: UpdateProductComponent},
   {path: 'product/delete', component: DeleteProductComponent},
+  {path: 'subscription', component: SubscriptionPageComponent},
 ];
 
 @NgModule({

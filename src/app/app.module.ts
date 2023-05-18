@@ -14,6 +14,7 @@ import {OrderComponent} from './order/order.component';
 import {FormsModule} from "@angular/forms";
 import {CheckoutModule} from "./checkout/checkout.module";
 import {FooterModule} from "./footer/footer.module";
+import {SubscriptionPageComponent} from "./subscription-page/subscription-page.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {FooterModule} from "./footer/footer.module";
     ProductDetailsComponent,
     CartComponent,
     OrderComponent,
+    SubscriptionPageComponent
   ],
   imports: [
     BrowserModule,
