@@ -48,9 +48,13 @@ export class ProductDetailsComponent implements OnInit {
     const existingItem = this.cartItems.find(item => item.product.id === product.id);
 
     if (existingItem) {
-      existingItem.quantity += quantity;
+      if (existingItem.quantity + quantity < product.stock) {
+        existingItem.quantity += quantity;
+      } else {
+        existingItem.quantity = product.stock;
+      }
     } else {
-      const item: CartModel = { quantity, product };
+      const item: CartModel = {quantity, product};
       this.cartItems.push(item);
     }
 

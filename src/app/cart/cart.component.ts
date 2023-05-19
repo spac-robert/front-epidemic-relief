@@ -15,7 +15,6 @@ export class CartComponent implements OnInit {
 
   constructor(private router: Router, private sharedService: SharedService) {
   }
-  //TODO sa se adauge un sg produs, nu de 2 ori
 
   ngOnInit(): void {
     this.cartItems = JSON.parse(this.cartDataString).map((item: { product: any; quantity: any; }) => ({
