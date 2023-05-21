@@ -14,10 +14,12 @@ import {SubscriptionPageComponent} from "./subscription-page/subscription-page.c
 import {LoginComponent} from "./login/login.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./register/register.component";
+import {AuthenticationGuardGuard} from "./login.guard";
+import {CheckRoleGuard} from "./check-role.guard";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
-  {path: 'product/add', component: AddProductComponent},
+  {path: 'product/add', component: AddProductComponent, canActivate: [AuthenticationGuardGuard,CheckRoleGuard]},
   {path: 'products', component: ProductsComponent},
   {path: 'products/p/:code', component: ProductDetailsComponent},
   {path: 'cart', component: CartComponent},
@@ -26,9 +28,9 @@ const routes: Routes = [
   {path: 'cart/checkout/acknowledgment', component: AcknowledgmentComponent},
   {path: 'product/update', component: UpdateProductComponent},
   {path: 'product/delete', component: DeleteProductComponent},
-  {path: 'subscription', component: SubscriptionPageComponent},
+  {path: 'subscription', component: SubscriptionPageComponent, canActivate: [AuthenticationGuardGuard]},
   {path: 'auth/login', component: LoginComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuardGuard]},
   {path: 'auth/register', component: RegisterComponent},
 ];
 

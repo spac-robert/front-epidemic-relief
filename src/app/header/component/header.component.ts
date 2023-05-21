@@ -11,4 +11,6 @@ export class HeaderComponent {
   cartUrl = '/cart';
   loginUrl = '/auth/login';
   profileUrl = '/profile';
+
+  token = localStorage.getItem("token")
 }

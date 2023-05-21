@@ -3,14 +3,14 @@
   <form>
     <div class="form-group">
       <label for="email">Email/Username:</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email">
+      <input type="email" id="email" name="email" placeholder="Enter your email" [(ngModel)]="login.email">
     </div>
     <div class="form-group">
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="Enter a password">
+      <input type="password" id="password" name="password" placeholder="Enter a password" [(ngModel)]="login.password">
     </div>
     <div class="form-group">
-      <button type="submit">Login</button>
+      <button (click)="submitLogin()">Login</button>
     </div>
   </form>
   <p>You don't have an account? <a [routerLink]="registerUrl">Register</a></p>

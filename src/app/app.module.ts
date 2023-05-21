@@ -15,9 +15,10 @@ import {FormsModule} from "@angular/forms";
 import {CheckoutModule} from "./checkout/checkout.module";
 import {FooterModule} from "./footer/footer.module";
 import {SubscriptionPageComponent} from "./subscription-page/subscription-page.component";
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RegisterComponent } from './register/register.component';
+import {LoginComponent} from './login/login.component';
+import {ProfileComponent} from './profile/profile.component';
+import {RegisterComponent} from './register/register.component';
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { RegisterComponent } from './register/register.component';
     SubscriptionPageComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,7 @@ import { RegisterComponent } from './register/register.component';
     FooterModule
 
   ],
-  providers: [],
+  providers: [JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

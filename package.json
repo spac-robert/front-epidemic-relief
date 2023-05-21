@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^15.1.0",
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
+    "@auth0/angular-jwt": "^5.1.2",
     "@coreui/angular": "^4.3.8",
     "@coreui/coreui": "^4.2.6",
     "@coreui/icons-angular": "^4.3.7",
