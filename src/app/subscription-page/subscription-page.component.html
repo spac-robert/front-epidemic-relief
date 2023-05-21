@@ -12,5 +12,10 @@
   <p>The quantities of each product will be calculated based on your family members to provide you with a weekly
     supply.</p>
   <p>Don't miss out on this amazing opportunity. Join our subscription service today!</p>
+  <h3>Select a date for weekly delivery</h3>
+  <label for="expiration-date">Date:</label><br>
+  <input type="date" id="expiration-date" [(ngModel)]="subscription.date" name="expiration-date"
+         min="{{ currentDate | date:'yyyy-MM-dd' }}" (change)="isFormValid()">
   <a (click)="subscribe()" class="subscription-button">Subscribe</a>
+  <p class="error-message" *ngIf="!isDateSelectedValid" style="color: red">Please select a date for weekly delivery.</p>
 </div>

@@ -45,11 +45,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     } else {
       request = this.service.getProducts(pageSize, this.page - 1, sortBy, sortDir);
     }
-
     this.getSortedProductSubscription = request.subscribe(
       (products) => {
         products.content.forEach(product => {
-          product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
+          if (product.mediaUrl!=null) {
+            product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
+          }
         })
         this.products = products.content;
         this.totalLength = products.totalElements;

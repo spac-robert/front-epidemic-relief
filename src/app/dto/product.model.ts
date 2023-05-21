@@ -73,3 +73,7 @@ export interface ProductOrder {
   idProduct: number;
 }
 
+export interface Subscription {
+  userId: number;
+  date: string;
+}

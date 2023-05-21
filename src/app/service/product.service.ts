@@ -1,5 +1,5 @@
-import {HttpClient} from "@angular/common/http";
-import {Page, ProductModel} from "../dto/product.model";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Page, ProductModel, Subscription} from "../dto/product.model";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 
@@ -58,9 +58,12 @@ export class ProductService {
       .subscribe(
         res => {
           this.retrieveResponse = res;
-          this.base64Data = this.retrieveResponse.mediaUrl.data;
-          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-          this.product.media.url = this.retrievedImage;
+          console.log(res)
+          if (this.retrieveResponse.mediaUrl != null) {
+            this.base64Data = this.retrieveResponse.mediaUrl.data;
+            this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+            this.product.media.url = this.retrievedImage;
+          }
           this.product.name = this.retrieveResponse.name;
           this.product.price = this.retrieveResponse.price;
           this.product.description = this.retrieveResponse.description;
@@ -115,5 +118,19 @@ export class ProductService {
         // Handle error, e.g., show an error message
       }
     );
+  }
+
+  subscribe(subscription: Subscription) {
+    let headerOption = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    let url = "http://localhost:8080/package/subscription";
+    this.http.post(url, subscription, headerOption).subscribe(
+      response => {
+        console.log(response); // handle successful response here
+      },
+      error => {
+        console.log(error); // handle error response here
+      });
   }
 }
