@@ -24,5 +24,5 @@ export interface Account {
 }
 
 export enum Role {
-  ADMIN, USER
+  ADMIN, CUSTOMER
 }

@@ -2,7 +2,11 @@
   <a class="active" [routerLink]="homeUrl">Home</a>
   <a [routerLink]="productsUrl">Products</a>
   <a *ngIf="!token" [routerLink]="loginUrl">Login/Register</a>
-  <a *ngIf="token" [routerLink]="profileUrl">Profile</a>
+  <a *ngIf="token || role" [routerLink]="profileUrl">Profile</a>
+  <a *ngIf="token && role?.toString()==='ADMIN'" [routerLink]="addURL">Add Product</a>
+    <a *ngIf="token && role?.toString()==='ADMIN'" [routerLink]="deleteURL">Delete Product</a>
+    <a *ngIf="token && role?.toString()==='ADMIN'" [routerLink]="updateURL">Update Product</a>
+  <a *ngIf="token" [routerLink]="logoutURL">Logout</a>
   <div class="search-container">
     <a [routerLink]="cartUrl">
       <img src="assets/image/shopping-bag.png" alt="Cart" class="cart-image">

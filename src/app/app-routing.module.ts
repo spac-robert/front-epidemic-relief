@@ -16,22 +16,24 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./register/register.component";
 import {AuthenticationGuardGuard} from "./login.guard";
 import {CheckRoleGuard} from "./check-role.guard";
+import {LogoutComponent} from "./logout/logout.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
-  {path: 'product/add', component: AddProductComponent, canActivate: [AuthenticationGuardGuard,CheckRoleGuard]},
+  {path: 'product/add', component: AddProductComponent, canActivate: [CheckRoleGuard]},
   {path: 'products', component: ProductsComponent},
   {path: 'products/p/:code', component: ProductDetailsComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'product/add/lot', component: AddLotComponent},
+  {path: 'product/add/lot', component: AddLotComponent,canActivate: [CheckRoleGuard]},
   {path: 'cart/checkout', component: CheckoutComponent},
   {path: 'cart/checkout/acknowledgment', component: AcknowledgmentComponent},
-  {path: 'product/update', component: UpdateProductComponent},
+  {path: 'product/update', component: UpdateProductComponent,canActivate: [CheckRoleGuard]},
   {path: 'product/delete', component: DeleteProductComponent},
   {path: 'subscription', component: SubscriptionPageComponent, canActivate: [AuthenticationGuardGuard]},
   {path: 'auth/login', component: LoginComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuardGuard]},
   {path: 'auth/register', component: RegisterComponent},
+  {path: 'auth/logout', component: LogoutComponent},
 ];
 
 @NgModule({

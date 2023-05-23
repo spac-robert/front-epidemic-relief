@@ -1,2 +1,4 @@
 <app-banner></app-banner>
-<app-subscription-button></app-subscription-button>
+<div *ngIf="token">
+  <app-subscription-button></app-subscription-button>
+</div>

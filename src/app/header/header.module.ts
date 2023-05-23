@@ -12,7 +12,7 @@ import {RouterLink} from "@angular/router";
   ],
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
   ]
 })
 export class HeaderModule { }

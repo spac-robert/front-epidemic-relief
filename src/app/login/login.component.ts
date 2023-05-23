@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Login, LoginResponse} from "../dto/auth.model";
 import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
+import {LoginServiceService} from "../service/login-service.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
     password: ""
   }
 
-  constructor(private service: AuthService, private router: Router) {
+  constructor(private service: AuthService, private router: Router, private loginService: LoginServiceService) {
   }
 
   submitLogin() {
@@ -23,8 +24,8 @@ export class LoginComponent {
       console.log(loginResponse);
       localStorage.setItem("user", JSON.stringify(loginResponse.user));
       localStorage.setItem("token", loginResponse.token);
+      this.loginService.setLoginSubject(loginResponse.user.role);
       this.router.navigateByUrl('/');
-      //TODO se schimba in header doar daca dau refresh de vb cu narcis
     })
   }
 
