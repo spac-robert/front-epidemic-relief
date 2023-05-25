@@ -11,16 +11,18 @@ export class HouseholdService {
   constructor(private http: HttpClient) {
   }
 
-  updateHousehold(household:Household){
-    let headerOption = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    this.http.post<any>('http://localhost:8080/account/update', household, headerOption).subscribe(
+  updateHousehold(household: Household) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    this.http.put<any>('http://localhost:8080/account/profile/household/update', household, {headers}).subscribe(
       response => {
-        console.log(response); // handle successful response here
+        console.log(response);
       },
       error => {
-        console.log(error); // handle error response here
+        console.log(error);
       }
     );
   }

@@ -16,9 +16,9 @@ export class AuthService implements OnInit {
   constructor(private http: HttpClient) {
   }
 
-  login(login: Login): Observable<LoginResponse> {
+  login(login: Login): Observable<HttpResponse<LoginResponse>> {
     let url = "http://localhost:8080/auth/login"
-    return this.http.post<LoginResponse>(url, login);
+    return this.http.post<LoginResponse>(url, login,{observe: 'response'});
   }
 
   register(register: Register): Observable<HttpResponse<any>> {

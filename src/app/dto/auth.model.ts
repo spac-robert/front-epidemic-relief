@@ -9,13 +9,17 @@ export interface Login {
   email: string;
   password: string;
 }
+
 export interface LoginResponse {
   token: string;
   user: Account;
+  error: string;
 }
+
 interface RegisterResponse {
   message: string;
 }
+
 export interface Account {
   id?: number;
   email: string;
@@ -32,7 +36,7 @@ export interface Household {
   id: number;
   contactAddress: string;
   numberOfChildren: number;
-  numberOfNonVegan: number;
+  numberOfNonVegans: number;
   numberOfVegans: number;
   numberOfPeople: number;
   phone: string;
