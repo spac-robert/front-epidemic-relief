@@ -3,8 +3,6 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Account, Login, LoginResponse, Register} from "../dto/auth.model";
 import {catchError, map, Observable, of} from "rxjs";
 
-class RegisterResponse {
-}
 
 @Injectable(
   {providedIn: 'root'}

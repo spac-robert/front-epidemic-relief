@@ -16,6 +16,11 @@ export interface LoginResponse {
   error: string;
 }
 
+export interface HouseholdResponse {
+  household: Household
+  error: string;
+}
+
 interface RegisterResponse {
   message: string;
 }
