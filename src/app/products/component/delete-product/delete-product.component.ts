@@ -28,6 +28,7 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
       this.getProducts(this.sortBy, this.sortDir, this.pageSize)
     }
   }
+
   //
   // getProducts(sortBy: string, sortDir: string, pageSize: number) {
   //   let request = this.service.getProducts(this.pageSize, this.page - 1, this.sortBy, this.sortDir);
@@ -51,11 +52,13 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
     } else {
       request = this.service.getProducts(pageSize, this.page - 1, sortBy, sortDir);
     }
-
-    this.getSortedProductSubscription = request.subscribe(
+    console.log(request)
+    ;this.getSortedProductSubscription = request.subscribe(
       (products) => {
         products.content.forEach(product => {
-          product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
+          if (product.mediaUrl != null) {
+            product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
+          }
         })
         this.productListPage = products.content;
         this.totalLength = products.totalElements;
@@ -64,6 +67,7 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   submitForm(product: ProductModel) {
     this.service.deleteProduct(product.id);
   }

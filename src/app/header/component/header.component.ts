@@ -22,12 +22,18 @@ export class HeaderComponent implements OnInit {
   role: Role | null = null;
 
   constructor(private loginService: LoginServiceService) {
+    this.loginService.getLoginSubject().subscribe((role) => {
+      this.role = role;
+      this.token = localStorage.getItem("token")
+      console.log(role)
+    })
   }
 
   ngOnInit(): void {
     this.loginService.getLoginSubject().subscribe((role) => {
       this.role = role;
       this.token = localStorage.getItem("token")
+      console.log(role)
     })
   }
 

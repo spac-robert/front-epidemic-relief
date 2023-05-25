@@ -1,7 +1,10 @@
 import {Injectable, OnInit} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Account, Login, LoginResponse} from "../dto/auth.model";
-import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {Account, Login, LoginResponse, Register} from "../dto/auth.model";
+import {catchError, map, Observable, of} from "rxjs";
+
+class RegisterResponse {
+}
 
 @Injectable(
   {providedIn: 'root'}
@@ -16,6 +19,11 @@ export class AuthService implements OnInit {
   login(login: Login): Observable<LoginResponse> {
     let url = "http://localhost:8080/auth/login"
     return this.http.post<LoginResponse>(url, login);
+  }
+
+  register(register: Register): Observable<HttpResponse<any>> {
+    let url = "http://localhost:8080/auth/register";
+    return this.http.post<HttpResponse<any>>(url, register, {observe: 'response'});
   }
 
   ngOnInit(): void {

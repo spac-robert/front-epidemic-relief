@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Account, Household} from "../dto/auth.model";
+import {HouseholdService} from "../service/household.service";
 
 @Component({
   selector: 'app-profile',
@@ -7,6 +9,20 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
-  //TODO de schimbat din albastru in #4CAF50(verde)
-  //facut logica dupa ce fac login
+  user: Account;
+
+  constructor(private account: HouseholdService) {
+    // @ts-ignore
+    this.user = JSON.parse(localStorage.getItem("user"));
+    console.log(this.user)
+  }
+
+
+  updateHousehold(household: Household) {
+    this.account.updateHousehold(household)
+  }
+
+  updateAccount(household: Household) {
+    this.account.updateHousehold(household)
+  }
 }
