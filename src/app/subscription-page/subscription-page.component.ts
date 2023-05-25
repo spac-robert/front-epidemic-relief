@@ -4,6 +4,7 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../app.state";
 import {Subscription} from "../dto/product.model";
 import {Router} from "@angular/router";
+import {Account} from "../dto/auth.model";
 
 @Component({
   selector: 'app-subscription-page',
@@ -11,16 +12,20 @@ import {Router} from "@angular/router";
   styleUrls: ['./subscription-page.component.scss']
 })
 export class SubscriptionPageComponent {
+  // @ts-ignore
+  user: Account | undefined = JSON.parse(localStorage.getItem('user'));
 
-  //TODO aici e Mocked id user
   subscription: Subscription = {
-    userId: 1,
+    userId: this.user?.id,
     date: ""
   }
   currentDate: Date = new Date();
   isDateSelectedValid: boolean = true;
 
   constructor(private service: ProductService, private router: Router) {
+    // @ts-ignore
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.subscription.userId = this.user?.id
   }
 
   //TODO    Acest mesaj trebuie sa se autogenereze, o sa fie primit de pe back
@@ -30,7 +35,6 @@ export class SubscriptionPageComponent {
   //     <li>Meat products for non-vegan family members.</li>
   subscribe() {
     if (this.subscription.date) {
-      //TODO aici am sa primesc unserul authentificat si lui am sa ii trimit id-ul catre back sa se aboneze
       this.service.subscribe(this.subscription);
       this.router.navigate(['/'])
     } else {

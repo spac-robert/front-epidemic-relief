@@ -31,7 +31,6 @@ export interface ProductModel {
   media: Media;
   mediaUrl: DisplayMedia;
   image: string
-
 }
 
 export interface Media {
@@ -74,6 +73,6 @@ export interface ProductOrder {
 }
 
 export interface Subscription {
-  userId: number;
+  userId?: number;
   date: string;
 }
