@@ -70,8 +70,6 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
     this.getSortedProductSubscription?.unsubscribe();
   }
 
-  //TODO dupa ce dau pe delete vreau sa se faca refresh la pagina
-
   onPageChange($event: number) {
     this.page = $event
     if (this.searchQuery.trim() === '') {

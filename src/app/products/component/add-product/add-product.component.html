@@ -21,6 +21,7 @@
       <input type="number" id="price" [(ngModel)]="product.price" name="price" min="0" step="0.1">
       <br><br>
       <button (click)="submitForm()">Submit</button>
+      <app-pop-up [modalText]="textToDisplay" [isModalOpen]="isModalOpen"></app-pop-up>
       <div *ngIf="!formValid">
         <span style="color: red;">Please enter valid information for all fields</span>
       </div>

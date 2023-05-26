@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Page, ProductModel, Subscription} from "../dto/product.model";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
+import {ProductResponse} from "../dto/auth.model";
 
 @Injectable(
   {providedIn: 'root'}
@@ -35,11 +36,8 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  addProduct(uploadImageData: FormData | undefined) {
-    this.http.post('http://localhost:8080/products/add', uploadImageData, {observe: 'response'})
-      .subscribe((response) => {
-        }
-      );
+  addProduct(uploadImageData: FormData | undefined): Observable<HttpResponse<ProductResponse>> {
+    return this.http.post<ProductResponse>('http://localhost:8080/products/add', uploadImageData, {observe: 'response'});
   }
 
   getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<Page<ProductModel>> {

@@ -21,7 +21,7 @@ export interface HouseholdResponse {
   error: string;
 }
 
-interface RegisterResponse {
+export interface ProductResponse {
   message: string;
 }
 

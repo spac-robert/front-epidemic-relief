@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductModel} from "../../../dto/product.model";
 import {ProductService} from "../../../service/product.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-product',
@@ -36,8 +37,7 @@ export class AddProductComponent implements OnInit {
   isSubmitted = false;
   errorMessage: string = "";
 
-//TODO dupa ce dau submit si totul este ok, sa imi apara un pop-up ca produsul a fosta daugat cu succes,
-  constructor(private service: ProductService) {
+  constructor(private service: ProductService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -60,7 +60,18 @@ export class AddProductComponent implements OnInit {
       this.uploadImageData?.append('price', this.product.price.toString());
       this.uploadImageData?.append('manufacturer', this.product.manufacturer);
 
-      this.service.addProduct(this.uploadImageData)
+      this.service.addProduct(this.uploadImageData).subscribe((response) => {
+        if (response.ok) {
+          this.isModalOpen = true;
+          if (response.body) {
+            this.textToDisplay = response.body.message;
+            //TODO sa se dea refresh la pagina
+            this.router.navigate(['/product/add']);
+          }
+        }
+      }, (error) => {
+        console.log(error)
+      })
       this.isSubmitted = true;
     } else {
       this.isSubmitted = false;
@@ -71,4 +82,8 @@ export class AddProductComponent implements OnInit {
   isFormValid(): boolean {
     return !!this.product.name && !!this.product.manufacturer && !!this.product.price && !!this.product.description;
   }
+
+  isModalOpen = false;
+  textToDisplay = 'This is the text to display in the modal.';
+
 }
