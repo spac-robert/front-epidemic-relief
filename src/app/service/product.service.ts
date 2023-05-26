@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Page, ProductModel, Subscription} from "../dto/product.model";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {ProductResponse} from "../dto/auth.model";
+import {LotResponse, SaveObjectResponse} from "../dto/auth.model";
 
 @Injectable(
   {providedIn: 'root'}
@@ -36,8 +36,8 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  addProduct(uploadImageData: FormData | undefined): Observable<HttpResponse<ProductResponse>> {
-    return this.http.post<ProductResponse>('http://localhost:8080/products/add', uploadImageData, {observe: 'response'});
+  addProduct(uploadImageData: FormData | undefined): Observable<HttpResponse<SaveObjectResponse>> {
+    return this.http.post<SaveObjectResponse>('http://localhost:8080/products/add', uploadImageData, {observe: 'response'});
   }
 
   getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<Page<ProductModel>> {
@@ -75,16 +75,26 @@ export class ProductService {
 
   }
 
-  addLot(lotData: FormData) {
+  // addLot(lotData: FormData) {
+  //   const token = localStorage.getItem('token');
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${token}`,
+  //     observe: 'response'
+  //   });
+  //   lotData.forEach((value, key) => {
+  //     console.log(key + ': ' + value);
+  //   });
+  //   return this.http.post('http://localhost:8080/products/add/lot', lotData, {headers});
+  // }
+
+  addLot(lotData: FormData): Observable<HttpResponse<SaveObjectResponse>> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
     });
-    lotData.forEach((value, key) => {
-      console.log(key + ': ' + value);
-    });
-    this.http.post('http://localhost:8080/products/add/lot', lotData, {headers}).subscribe(data => {
-      console.log(data);
+    return this.http.post<SaveObjectResponse>('http://localhost:8080/products/add/lot', lotData, {
+      headers,
+      observe: 'response'
     });
   }
 
@@ -102,22 +112,33 @@ export class ProductService {
     return this.http.get<Page<ProductModel>>(url);
   }
 
-  updateProduct(productUpdate: FormData | undefined) {
+  // updateProduct(productUpdate: FormData | undefined) {
+  //   const token = localStorage.getItem('token');
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${token}`
+  //   });
+  //   const url = 'http://localhost:8080/products/update';
+  //
+  //   this.http.put(url, productUpdate, {headers})
+  //     .subscribe(
+  //       () => {
+  //         // Handle success response
+  //       },
+  //       (error) => {
+  //         // Handle error response
+  //       }
+  //     );
+  // }
+
+  updateProduct(productUpdate: FormData | undefined): Observable<HttpResponse<SaveObjectResponse>> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
     });
-    const url = 'http://localhost:8080/products/update';
-
-    this.http.put(url, productUpdate, {headers})
-      .subscribe(
-        () => {
-          // Handle success response
-        },
-        (error) => {
-          // Handle error response
-        }
-      );
+    return this.http.put<SaveObjectResponse>('http://localhost:8080/products/update', productUpdate, {
+      headers,
+      observe: 'response'
+    });
   }
 
   deleteProduct(id: string | undefined): Observable<HttpResponse<string>> {

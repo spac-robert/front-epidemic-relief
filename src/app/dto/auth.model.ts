@@ -21,7 +21,11 @@ export interface HouseholdResponse {
   error: string;
 }
 
-export interface ProductResponse {
+export interface SaveObjectResponse {
+  message: string;
+}
+
+export interface LotResponse {
   message: string;
 }
 

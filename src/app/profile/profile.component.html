@@ -83,25 +83,25 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Members of family</label>
-                <input type="number" class="form-control" min="0" [(ngModel)]="user.household.numberOfPeople">
+                <input type="number" class="form-control" min="1" [(ngModel)]="user.household.numberOfPeople" (input)="validateNumberOfPeople()">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Children</label>
-                <input type="number" class="form-control" min="0" [(ngModel)]="user.household.numberOfChildren">
+                <input type="number" class="form-control" min="0" [(ngModel)]="user.household.numberOfChildren" (input)="validateNumberOfChildren()">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Vegans</label>
-                <input type="number" class="form-control" min="0" [(ngModel)]="user.household.numberOfVegans">
+                <input type="number" class="form-control" min="0" [(ngModel)]="user.household.numberOfVegans" (input)="validateNumberOfVegans()">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Non-vegans</label>
-                <input type="number" class="form-control" min="0" [(ngModel)]="user.household.numberOfNonVegans">
+                <input type="number" class="form-control" min="0" [(ngModel)]="user.household.numberOfNonVegans" (input)="validateNumberOfNonVegans()">
               </div>
             </div>
           </div>

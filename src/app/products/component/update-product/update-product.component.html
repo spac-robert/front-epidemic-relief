@@ -3,8 +3,10 @@
     <label>Change image: </label>
     <input class="form-control" type="file" (change)="onFileChanged({event : $event})"/>
     <div *ngIf="productUpdate && productUpdate.media">
-      <label>Current image: </label>
-      <img class="min-img" [src]="productUpdate.media.url" alt="">
+      <div *ngIf="productUpdate.media.url">
+        <label>Current image: </label>
+        <img class="min-img" [src]="productUpdate.media.url" alt="">
+      </div>
     </div>
   </div>
 </div>
@@ -14,7 +16,7 @@
     <form>
       <label for="productNameList">Product Name:</label><br>
       <select id="productNameList" [(ngModel)]="productUpdate.name" name="productNameList"
-              (change)="onSelectProduct(productUpdate.name)" *ngIf="productList"  style="width: 500px;">
+              (change)="onSelectProduct(productUpdate.name)" *ngIf="productList" style="width: 500px;">
         <option *ngFor="let product of productList" [value]="product.name">{{ product.name }}</option>
       </select>
       <br>
@@ -35,6 +37,8 @@
       <input type="number" id="price" [(ngModel)]="productUpdate.price" name="price" min="0" step="0.1">
       <br><br>
       <button (click)="submitForm()">Submit</button>
+      <app-pop-up [modalText]="textToDisplay" [isModalOpen]="isModalOpen"
+                  (isModalOpenChange)="onModalOpenChange($event)"></app-pop-up>
       <div *ngIf="!formValid">
         <span style="color: red;">Please enter valid information for all fields</span>
       </div>

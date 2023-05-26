@@ -108,9 +108,15 @@ export class AddProductComponent implements OnInit {
   }
 
   isModalOpen = false;
-  textToDisplay = 'This is the text to display in the modal.';
+  textToDisplay = '';
 
   onModalOpenChange(updatedValue: boolean) {
     this.isModalOpen = updatedValue;
+  }
+
+  validatePrice() {
+    if (this.product.price < 0) {
+      this.product.price = 0;
+    }
   }
 }

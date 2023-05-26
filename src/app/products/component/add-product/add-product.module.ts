@@ -11,6 +11,9 @@ import {PopUpComponent} from "../../../pop-up/pop-up.component";
     AddProductComponent,
     PopUpComponent
   ],
+  exports: [
+    PopUpComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,

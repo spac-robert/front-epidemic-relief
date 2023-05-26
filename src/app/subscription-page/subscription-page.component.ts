@@ -28,11 +28,6 @@ export class SubscriptionPageComponent {
     this.subscription.userId = this.user?.id
   }
 
-  //TODO    Acest mesaj trebuie sa se autogenereze, o sa fie primit de pe back
-  //     <li>2 liters of water per day for each family member.</li>
-  //     <li>A chocolate and an orange juice for each child.</li>
-  //     <li>Vegan canned products for vegan family members.</li>
-  //     <li>Meat products for non-vegan family members.</li>
   subscribe() {
     if (this.subscription.date) {
       this.service.subscribe(this.subscription);

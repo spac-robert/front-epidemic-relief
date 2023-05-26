@@ -16,6 +16,8 @@
       <input type="number" id="quantity" [(ngModel)]="lot.quantity" name="quantity" min="0" (change)="isFormValid()">
       <br>
       <button (click)="submitForm()">Submit</button>
+      <app-pop-up [modalText]="textToDisplay" [isModalOpen]="isModalOpen"
+                  (isModalOpenChange)="onModalOpenChange($event)"></app-pop-up>
       <div *ngIf="!formValid">
         <span style="color: red;">Please enter a valid quantity and expiration date</span>
       </div>

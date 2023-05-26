@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Lot, ProductModel} from "../../../dto/product.model";
 import {ProductService} from "../../../service/product.service";
 import {generateLotId} from "../../../utils/utils";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-lot',
@@ -23,8 +24,10 @@ export class AddLotComponent implements OnInit {
   errorMessage: string = "";
   formValid: boolean = true;
   productList: ProductModel[] = [];
+  isModalOpen = false;
+  textToDisplay = '';
 
-  constructor(private service: ProductService) {
+  constructor(private service: ProductService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -40,7 +43,18 @@ export class AddLotComponent implements OnInit {
       this.lotData?.append('quantity', this.lot.quantity.toString());
       this.lotData?.append('expirationDate', this.lot.expirationDate);
 
-      this.service.addLot(this.lotData);
+      this.service.addLot(this.lotData).subscribe((response) => {
+        console.log(response);
+        if (response.ok) {
+          this.isModalOpen = true;
+          if (response.body) {
+            this.textToDisplay = response.body.message;
+            this.setDefaultValue();
+            //TODO sa se dea refresh la pagina
+            this.router.navigate(['/product/add/lot']);
+          }
+        }
+      });
       this.isSubmitted = true;
     } else {
       this.isSubmitted = false;
@@ -55,6 +69,10 @@ export class AddLotComponent implements OnInit {
     return quantity > 0 && expirationDate > this.currentDate;
   }
 
+  onModalOpenChange(updatedValue: boolean) {
+    this.isModalOpen = updatedValue;
+  }
+
   fetchProducts() {
     this.service.getAllProducts().subscribe(
       (products: ProductModel[]) => {
@@ -67,8 +85,18 @@ export class AddLotComponent implements OnInit {
       }
     );
   }
+
   getNextDayDate(): string {
     const nextDay = new Date(this.currentDate.getTime() + 24 * 60 * 60 * 1000); // Adding 24 hours in milliseconds
     return nextDay.toISOString().split('T')[0];
+  }
+
+  private setDefaultValue() {
+    this.lot = {
+      id: "",
+      productId: 0,
+      quantity: 0,
+      expirationDate: "",
+    }
   }
 }
