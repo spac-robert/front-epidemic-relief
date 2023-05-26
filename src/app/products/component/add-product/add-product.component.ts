@@ -14,7 +14,6 @@ export class AddProductComponent implements OnInit {
     name: '',
     stock: 0,
     description: '',
-    // expirationDate: '',
     manufacturer: '',
     price: 0,
     media: {
@@ -30,7 +29,7 @@ export class AddProductComponent implements OnInit {
     image: ""
   }
 
-  selectedFile!: File;
+  selectedFile!: File | undefined;
   retrievedImage: any;
   uploadImageData?: FormData;
   formValid: boolean = true;
@@ -47,9 +46,11 @@ export class AddProductComponent implements OnInit {
   public onFileChanged({event}: { event: any }) {
     this.selectedFile = event.target.files[0];
     this.uploadImageData = new FormData();
-    this.uploadImageData.append('media', this.selectedFile, this.selectedFile.name);
+    if (this.selectedFile) {
+      this.uploadImageData.append('media', this.selectedFile, this.selectedFile.name);
 
-    this.product.media.mime = this.selectedFile.type
+      this.product.media.mime = this.selectedFile.type
+    }
   }
 
   submitForm() {
@@ -65,6 +66,7 @@ export class AddProductComponent implements OnInit {
           this.isModalOpen = true;
           if (response.body) {
             this.textToDisplay = response.body.message;
+            this.setDefaultValue();
             //TODO sa se dea refresh la pagina
             this.router.navigate(['/product/add']);
           }
@@ -79,6 +81,28 @@ export class AddProductComponent implements OnInit {
     }
   }
 
+  private setDefaultValue() {
+    this.selectedFile = undefined;
+    this.product = {
+      name: '',
+      stock: 0,
+      description: '',
+      manufacturer: '',
+      price: 0,
+      media: {
+        uploadImageData: null,
+        mime: '',
+        url: '',
+      },
+      mediaUrl: {
+        name: '',
+        id: 0,
+        data: new Blob()
+      },
+      image: ""
+    }
+  }
+
   isFormValid(): boolean {
     return !!this.product.name && !!this.product.manufacturer && !!this.product.price && !!this.product.description;
   }
@@ -86,4 +110,7 @@ export class AddProductComponent implements OnInit {
   isModalOpen = false;
   textToDisplay = 'This is the text to display in the modal.';
 
+  onModalOpenChange(updatedValue: boolean) {
+    this.isModalOpen = updatedValue;
+  }
 }

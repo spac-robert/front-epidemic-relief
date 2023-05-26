@@ -41,8 +41,6 @@ import {LogoutComponent} from './logout/logout.component';
     ProductModule,
     AddProductModule,
     CheckoutModule,
-    //TODO aici nu stiu daca trebuie sa fac asa
-    //StoreModule.forRoot({products:productReducer})
     StoreModule.forRoot({}),
     FormsModule,
     FooterModule

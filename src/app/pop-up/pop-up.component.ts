@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-pop-up',
@@ -8,8 +8,10 @@ import {Component, Input} from '@angular/core';
 export class PopUpComponent {
   @Input() modalText: string | undefined;
   @Input() isModalOpen: boolean | undefined;
+  @Output() isModalOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   closePopup() {
     this.isModalOpen = false;
+    this.isModalOpenChange.emit(this.isModalOpen);
   }
 }
