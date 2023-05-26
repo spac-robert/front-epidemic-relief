@@ -60,9 +60,15 @@
                 <input type="text" class="form-control"  [(ngModel)]="user.household.city" >
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Role</label>
+                <input type="text" class="form-control" [(ngModel)]="user.role" readonly >
+              </div>
+            </div>
           </div>
           <div>
-            <button class="btn btn-primary" (click)="updateAccount(user.household)">Update</button>
+            <button class="btn btn-primary" (click)="updateHousehold(user.household)">Update</button>
           </div>
         </div>
         <div class="tab-pane fade" id="household" role="tabpanel" aria-labelledby="application-tab">

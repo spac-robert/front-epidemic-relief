@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   profileUrl = 'profile';
   logoutURL = 'auth/logout';
   addURL = 'product/add';
+  addLotURL = 'product/add/lot';
   deleteURL = 'product/delete';
   updateURL = "product/update";
 

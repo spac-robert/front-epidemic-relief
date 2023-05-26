@@ -12,13 +12,13 @@ export class HouseholdService {
   constructor(private http: HttpClient) {
   }
 
-  updateHousehold(household: Household): Observable<HttpResponse<HouseholdResponse>> {
+  updateHousehold(household: Household): Observable<HouseholdResponse> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<HttpResponse<HouseholdResponse>>('http://localhost:8080/account/profile/household/update', household, {headers});
+    return this.http.put<HouseholdResponse>('http://localhost:8080/account/profile/household/update', household, {headers});
   }
 
 }

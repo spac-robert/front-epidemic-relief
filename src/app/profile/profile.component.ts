@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Account, Household} from "../dto/auth.model";
+import {Account, Household, HouseholdResponse} from "../dto/auth.model";
 import {HouseholdService} from "../service/household.service";
 
 @Component({
@@ -20,9 +20,14 @@ export class ProfileComponent {
 
 
   updateHousehold(household: Household) {
-    this.account.updateHousehold(household).subscribe((response) => {
-      if (response.status === 200) {
-        console.log("Sa fac update la user din localstorage")
+    this.account.updateHousehold(household).subscribe((response: HouseholdResponse) => {
+      console.log("ACCOUNT: " + response)
+      if (response.error == null) {
+        if (response.household) {
+          this.user.household = response.household;
+          localStorage.removeItem('user');
+          localStorage.setItem('user', JSON.stringify(this.user));
+        }
       }
     }, (error) => {
       console.error('Error:', error);
@@ -31,9 +36,5 @@ export class ProfileComponent {
         this.errorMessage = "";
       }, 5000);
     })
-  }
-
-  updateAccount(household: Household) {
-    this.account.updateHousehold(household)
   }
 }

@@ -78,10 +78,14 @@ export class ProductService {
   }
 
   addLot(lotData: FormData) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
     lotData.forEach((value, key) => {
       console.log(key + ': ' + value);
     });
-    this.http.post('http://localhost:8080/products/add/lot', lotData).subscribe(data => {
+    this.http.post('http://localhost:8080/products/add/lot', lotData, {headers}).subscribe(data => {
       console.log(data);
     });
   }
@@ -100,18 +104,6 @@ export class ProductService {
     return this.http.get<Page<ProductModel>>(url);
   }
 
-  // updateProduct(productUpdate: FormData | undefined) {
-  //   const token = localStorage.getItem('token');
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Bearer ${token}`
-  //   });
-  //   let url = "http://localhost:8080/products/update";
-  //   this.http.put(url, productUpdate, {headers})
-  //     .subscribe((response) => {
-  //       }
-  //     );
-  // }
   updateProduct(productUpdate: FormData | undefined) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({

@@ -67,4 +67,8 @@ export class AddLotComponent implements OnInit {
       }
     );
   }
+  getNextDayDate(): string {
+    const nextDay = new Date(this.currentDate.getTime() + 24 * 60 * 60 * 1000); // Adding 24 hours in milliseconds
+    return nextDay.toISOString().split('T')[0];
+  }
 }

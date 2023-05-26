@@ -61,10 +61,9 @@ export interface OrderDetails {
   phoneNumber: string;
   address: string;
   city: string;
-  state: string;
-  zip: string;
+  county: string;
   products: ProductOrder[]
-  price: number
+  totalPrice: number
 }
 
 export interface ProductOrder {
