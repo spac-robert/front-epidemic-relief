@@ -34,9 +34,9 @@
               <div class="out-of-stock" *ngIf="product.stock === 0">Out of Stock</div>
             </div>
             <div>
-              <h2>{{product.name}}</h2>
+              <h2>{{product.name | truncate: 20}}</h2>
               <p class="price">Price: {{product.price}} Ron</p>
-              <p class="description">Description: {{product.description}}</p>
+              <p class="description">Description: {{product.description | truncate: 20}}</p>
             </div>
           </a>
           <button [routerLink]="url+product.id" class="center-btn">Show Details</button>

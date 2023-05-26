@@ -1,7 +1,8 @@
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Page, ProductModel, Subscription} from "../dto/product.model";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
+import {LotResponse, SaveObjectResponse} from "../dto/auth.model";
 
 @Injectable(
   {providedIn: 'root'}
@@ -24,7 +25,7 @@ export class ProductService {
       id: 0,
       data: new Blob()
     },
-    image: "",
+    image: ""
   }
   products: ProductModel[] = [];
   product = this.defaultProduct
@@ -35,11 +36,8 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  addProduct(uploadImageData: FormData | undefined) {
-    this.http.post('http://localhost:8080/products/add', uploadImageData, {observe: 'response'})
-      .subscribe((response) => {
-        }
-      );
+  addProduct(uploadImageData: FormData | undefined): Observable<HttpResponse<SaveObjectResponse>> {
+    return this.http.post<SaveObjectResponse>('http://localhost:8080/products/add', uploadImageData, {observe: 'response'});
   }
 
   getProducts(pageSize: number, pageNumber: number, sortBy: string, sortDir: string): Observable<Page<ProductModel>> {
@@ -77,12 +75,26 @@ export class ProductService {
 
   }
 
-  addLot(lotData: FormData) {
-    lotData.forEach((value, key) => {
-      console.log(key + ': ' + value);
+  // addLot(lotData: FormData) {
+  //   const token = localStorage.getItem('token');
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${token}`,
+  //     observe: 'response'
+  //   });
+  //   lotData.forEach((value, key) => {
+  //     console.log(key + ': ' + value);
+  //   });
+  //   return this.http.post('http://localhost:8080/products/add/lot', lotData, {headers});
+  // }
+
+  addLot(lotData: FormData): Observable<HttpResponse<SaveObjectResponse>> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
     });
-    this.http.post('http://localhost:8080/products/add/lot', lotData).subscribe(data => {
-      console.log(data);
+    return this.http.post<SaveObjectResponse>('http://localhost:8080/products/add/lot', lotData, {
+      headers,
+      observe: 'response'
     });
   }
 
@@ -100,32 +112,54 @@ export class ProductService {
     return this.http.get<Page<ProductModel>>(url);
   }
 
-  updateProduct(productUpdate: FormData | undefined) {
-    let url = "http://localhost:8080/products/update";
-    this.http.put(url, productUpdate, {observe: 'response'})
-      .subscribe((response) => {
-        }
-      );
+  // updateProduct(productUpdate: FormData | undefined) {
+  //   const token = localStorage.getItem('token');
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${token}`
+  //   });
+  //   const url = 'http://localhost:8080/products/update';
+  //
+  //   this.http.put(url, productUpdate, {headers})
+  //     .subscribe(
+  //       () => {
+  //         // Handle success response
+  //       },
+  //       (error) => {
+  //         // Handle error response
+  //       }
+  //     );
+  // }
+
+  updateProduct(productUpdate: FormData | undefined): Observable<HttpResponse<SaveObjectResponse>> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    });
+    return this.http.put<SaveObjectResponse>('http://localhost:8080/products/update', productUpdate, {
+      headers,
+      observe: 'response'
+    });
   }
 
-  deleteProduct(id: string | undefined) {
+  deleteProduct(id: string | undefined): Observable<HttpResponse<string>> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
     let url = `http://localhost:8080/products/delete/${id}`;
-    this.http.delete(url).subscribe(
-      () => {
-        // Handle successful deletion, e.g., show a success message or update the product list
-      },
-      (error) => {
-        // Handle error, e.g., show an error message
-      }
-    );
+    return this.http.delete(url, {headers, observe: 'response', responseType: 'text'});
   }
 
   subscribe(subscription: Subscription) {
-    let headerOption = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
     let url = "http://localhost:8080/package/subscription";
-    this.http.post(url, subscription, headerOption).subscribe(
+    this.http.post(url, subscription, {headers}).subscribe(
       response => {
         console.log(response); // handle successful response here
       },

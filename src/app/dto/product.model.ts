@@ -31,7 +31,6 @@ export interface ProductModel {
   media: Media;
   mediaUrl: DisplayMedia;
   image: string
-
 }
 
 export interface Media {
@@ -62,10 +61,9 @@ export interface OrderDetails {
   phoneNumber: string;
   address: string;
   city: string;
-  state: string;
-  zip: string;
+  county: string;
   products: ProductOrder[]
-  price: number
+  totalPrice: number
 }
 
 export interface ProductOrder {
@@ -74,6 +72,6 @@ export interface ProductOrder {
 }
 
 export interface Subscription {
-  userId: number;
+  userId?: number;
   date: string;
 }

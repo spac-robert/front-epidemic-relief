@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductModel} from "../../../dto/product.model";
 import {ProductService} from "../../../service/product.service";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-delete-product',
@@ -19,8 +20,9 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
   sortDir: string = "asc"
   getSortedProductSubscription: Subscription | undefined
   searchQuery: string = '';
+  errorMessage: string = "";
 
-  constructor(private service: ProductService) {
+  constructor(private service: ProductService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -28,21 +30,6 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
       this.getProducts(this.sortBy, this.sortDir, this.pageSize)
     }
   }
-  //
-  // getProducts(sortBy: string, sortDir: string, pageSize: number) {
-  //   let request = this.service.getProducts(this.pageSize, this.page - 1, this.sortBy, this.sortDir);
-  //   this.getSortedProductSubscription = request.subscribe(
-  //     (products) => {
-  //       products.content.forEach(product => {
-  //         product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
-  //       })
-  //       this.productListPage = products.content;
-  //       this.totalLength = products.totalElements;
-  //       this.pageSize = products.pageable.pageSize;
-  //       this.page = products.pageable.pageNumber + 1;
-  //     }
-  //   );
-  // }
 
   getProducts(sortBy: string, sortDir: string, pageSize: number) {
     let request;
@@ -51,11 +38,13 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
     } else {
       request = this.service.getProducts(pageSize, this.page - 1, sortBy, sortDir);
     }
-
-    this.getSortedProductSubscription = request.subscribe(
+    console.log(request)
+    ;this.getSortedProductSubscription = request.subscribe(
       (products) => {
         products.content.forEach(product => {
-          product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
+          if (product.mediaUrl != null) {
+            product.image = 'data:image/jpeg;base64,' + product.mediaUrl.data
+          }
         })
         this.productListPage = products.content;
         this.totalLength = products.totalElements;
@@ -64,15 +53,22 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   submitForm(product: ProductModel) {
-    this.service.deleteProduct(product.id);
+    this.service.deleteProduct(product.id).subscribe((response) => {
+      if (response.status === 200) {
+        this.getProducts(this.sortBy, this.sortDir, this.pageSize)
+        this.router.navigate(['/product/delete']);
+      }
+    }, (error) => {
+      console.error('Error:', error);
+      this.errorMessage = error.error.message;
+    });
   }
 
   ngOnDestroy(): void {
     this.getSortedProductSubscription?.unsubscribe();
   }
-
-  //TODO dupa ce dau pe delete vreau sa se faca refresh la pagina
 
   onPageChange($event: number) {
     this.page = $event

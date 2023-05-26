@@ -21,10 +21,9 @@ export class CheckoutComponent implements OnInit {
     phoneNumber: "",
     address: "",
     city: "",
-    state: "",
-    zip: "",
+    county: "",
     products: [],
-    price: 0
+    totalPrice: 0
   }
 
   constructor(private checkoutService: CheckoutService, private sharedService: SharedService, private router: Router) {
@@ -41,7 +40,7 @@ export class CheckoutComponent implements OnInit {
     this.order.products = this.sharedService.products
     let totalPrice = localStorage.getItem('totalPrice')
     if (totalPrice != null) {
-      this.order.price = parseInt(totalPrice);
+      this.order.totalPrice = parseInt(totalPrice);
     }
 
     if (!navigator.geolocation) {

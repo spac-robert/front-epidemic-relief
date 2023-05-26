@@ -31,10 +31,11 @@ export class UpdateProductComponent implements OnInit {
   }
   formValid: boolean = true;
   selectedFile!: File;
-  retrievedImage: any;
   uploadImageData?: FormData;
   isSubmitted = false;
   errorMessage: string = "";
+  isModalOpen = false;
+  textToDisplay = '';
 
   constructor(private service: ProductService) {
   }
@@ -86,7 +87,16 @@ export class UpdateProductComponent implements OnInit {
       this.uploadImageData?.append('price', this.productUpdate.price.toString());
       this.uploadImageData?.append('manufacturer', this.productUpdate.manufacturer);
 
-      this.service.updateProduct(this.uploadImageData)
+      this.service.updateProduct(this.uploadImageData).subscribe((response) => {
+        console.log(response);
+        if (response.ok) {
+          if (response.body) {
+            this.isModalOpen = true;
+            this.textToDisplay = response.body.message;
+            this.setDefaultValue();
+          }
+        }
+      });
       this.isSubmitted = true;
     } else {
       this.isSubmitted = false;
@@ -104,4 +114,29 @@ export class UpdateProductComponent implements OnInit {
     this.productUpdate.media.mime = this.selectedFile.type
   }
 
+  onModalOpenChange(updatedValue: boolean) {
+    this.isModalOpen = updatedValue;
+  }
+
+  private setDefaultValue() {
+    this.productUpdate = {
+      name: '',
+      stock: 0,
+      description: '',
+      // expirationDate: '',
+      manufacturer: '',
+      price: 0,
+      media: {
+        uploadImageData: null,
+        mime: '',
+        url: '',
+      },
+      mediaUrl: {
+        name: '',
+        id: 0,
+        data: new Blob()
+      },
+      image: ""
+    }
+  }
 }

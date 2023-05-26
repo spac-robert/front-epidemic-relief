@@ -15,9 +15,11 @@ import {FormsModule} from "@angular/forms";
 import {CheckoutModule} from "./checkout/checkout.module";
 import {FooterModule} from "./footer/footer.module";
 import {SubscriptionPageComponent} from "./subscription-page/subscription-page.component";
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RegisterComponent } from './register/register.component';
+import {LoginComponent} from './login/login.component';
+import {ProfileComponent} from './profile/profile.component';
+import {RegisterComponent} from './register/register.component';
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {LogoutComponent} from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { RegisterComponent } from './register/register.component';
     SubscriptionPageComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,14 +41,12 @@ import { RegisterComponent } from './register/register.component';
     ProductModule,
     AddProductModule,
     CheckoutModule,
-    //TODO aici nu stiu daca trebuie sa fac asa
-    //StoreModule.forRoot({products:productReducer})
     StoreModule.forRoot({}),
     FormsModule,
     FooterModule
 
   ],
-  providers: [],
+  providers: [JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
